@@ -6,8 +6,8 @@ import { SearchOutlined, WalletOutlined } from '@ant-design/icons';
 
 const LogoImage = styled.div`
   .logo {
-    /* margin-top: 1rem; */
     margin-top: 0.2rem;
+    margin-left: 1rem;
     height: 1.8rem;
     object-fit: cover;
   }
@@ -16,18 +16,16 @@ const LogoImage = styled.div`
 const Container = styled.div`
   display: flex;
   justify-content: space-between;
-  /* margin-top: 1.3rem;
-  margin-left: 1.5rem; */
   margin: 1rem 1.5rem 0 1.5rem;
-  border-bottom: 2px solid;
-  border-color: rgba(0, 0, 0, 0.1);
+  /* border-bottom: 2px solid;
+  border-color: rgba(0, 0, 0, 0.1); */
 `;
 
 const SearchWrapper = styled.div`
   display: flex;
-  width: 21rem;
+  width: 25rem;
   margin-bottom: 0.5rem;
-  margin-left: 3rem;
+  margin-left: 3.5rem;
 `;
 
 const LeftItems = styled.div`
@@ -35,12 +33,10 @@ const LeftItems = styled.div`
 `;
 
 const RightItems = styled.div`
-  /* width: 20rem; */
-  width: 25rem;
+  width: 22rem;
   margin-right: 3rem;
   display: flex;
   justify-content: space-between;
-  color: rgb(57, 102, 249);
 `;
 
 const StyledSearchInput = styled.div`
