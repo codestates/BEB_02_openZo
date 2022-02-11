@@ -1,8 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { Form, Button, Input, Space } from 'antd';
-import { SearchOutlined, WalletOutlined } from '@ant-design/icons';
+import { Button, Input } from 'antd';
+import {
+  SearchOutlined,
+  WalletOutlined,
+  PictureOutlined,
+} from '@ant-design/icons';
 
 const LogoImage = styled.div`
   .logo {
@@ -17,8 +21,6 @@ const Container = styled.div`
   display: flex;
   justify-content: space-between;
   margin: 1rem 1.5rem 0 1.5rem;
-  /* border-bottom: 2px solid;
-  border-color: rgba(0, 0, 0, 0.1); */
 `;
 
 const SearchWrapper = styled.div`
@@ -34,7 +36,7 @@ const LeftItems = styled.div`
 
 const RightItems = styled.div`
   width: 22rem;
-  margin-right: 3rem;
+  margin-right: 2rem;
   display: flex;
   justify-content: space-between;
 `;
@@ -47,10 +49,8 @@ const StyledSearchInput = styled.div`
 `;
 
 export default function Navbar() {
-  // Logo
-  // search
-  // explore
-  // create
+  // TODO: Search 기능
+  // TODO: connect wallet 시 metamask 연결, myNFT 버튼으로 변경
   // myNFT / connect (icon)
   const handleSearchButton = () => {};
 
@@ -79,6 +79,9 @@ export default function Navbar() {
         <Button shape="round" icon={<WalletOutlined />}>
           Connect
         </Button>
+        {/* <Link to="/mynft">
+          <Button shape="round" icon={<PictureOutlined />}>MyNFTs</Button>
+        </Link> */}
       </RightItems>
     </Container>
   );
