@@ -3,7 +3,10 @@ import { Carousel } from 'antd';
 import styled from 'styled-components';
 import Background from './Background';
 
+const Container = styled.div``;
+
 const BackgroundWrapper = styled.div`
+  position: absolute;
   width: 100vw;
   height: 45vh;
   box-shadow: 1px 1px 5px 1px grey;
@@ -11,9 +14,9 @@ const BackgroundWrapper = styled.div`
 `;
 
 const CarouselWrapper = styled.div`
-  height: 45vh;
   position: relative;
-  top: -45vh;
+  height: 45vh;
+  /* top: -45vh; */
   backdrop-filter: blur(10px);
 `;
 
@@ -27,7 +30,7 @@ export default function Banner() {
   };
 
   return (
-    <>
+    <Container>
       <BackgroundWrapper>
         <Background />
       </BackgroundWrapper>
@@ -47,6 +50,6 @@ export default function Banner() {
           </div>
         </Carousel>
       </CarouselWrapper>
-    </>
+    </Container>
   );
 }

@@ -10,15 +10,13 @@ export default function Footer() {
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 1px solid;
-    backdrop-filter: blur(10px);
+    background-color: rgba(0, 0, 0, 0.1);
+    /* backdrop-filter: blur(10px); */
   `;
 
   const StyledA = styled.a`
     color: black;
   `;
-
-  //TODO: github icon 넣기
 
   return (
     <StyledFooter>
