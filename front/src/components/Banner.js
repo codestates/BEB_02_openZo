@@ -8,15 +8,14 @@ const Container = styled.div``;
 const BackgroundWrapper = styled.div`
   position: absolute;
   width: 100vw;
-  height: 45vh;
+  height: 85vh;
   box-shadow: 1px 1px 5px 1px grey;
   // [h-offset] [v-offset] [blur] [spread] [color]
 `;
 
 const CarouselWrapper = styled.div`
   position: relative;
-  height: 45vh;
-  /* top: -45vh; */
+  height: 85vh;
   backdrop-filter: blur(10px);
 `;
 
@@ -24,10 +23,12 @@ export default function Banner() {
   const contentStyle = {
     height: '100%',
     color: '#fff',
-    lineHeight: '45vh',
+    lineHeight: '85vh',
     textAlign: 'center',
     background: 'rgba(0,0,0,0.3)',
   };
+
+  // TODO: NFT 몇개 불러와서 넣어주고 Carousel에 표시
 
   return (
     <Container>
@@ -35,7 +36,7 @@ export default function Banner() {
         <Background />
       </BackgroundWrapper>
       <CarouselWrapper>
-        <Carousel autoplay>
+        <Carousel>
           <div>
             <h3 style={contentStyle}>1</h3>
           </div>
