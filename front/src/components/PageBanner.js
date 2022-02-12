@@ -26,7 +26,7 @@ const StyledH1 = styled.h1`
   align-items: center;
   height: 100%;
   font-size: 3rem;
-  color: rgba(255, 255, 255, 1);
+  color: rgba(255, 255, 255, 0.5);
 `;
 
 export default function Banner({ text }) {
