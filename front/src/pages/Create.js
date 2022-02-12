@@ -1,5 +1,10 @@
 import React from 'react';
+import PageBanner from '../components/PageBanner';
 
 export default function Create() {
-  return <div>Create</div>;
+  return (
+    <>
+      <PageBanner text={'Create'} />
+    </>
+  );
 }
