@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Button } from 'antd';
 import { GithubOutlined } from '@ant-design/icons';
 
 export default function Footer() {
@@ -18,6 +17,20 @@ export default function Footer() {
     color: black;
   `;
 
+  const NotionLogo = styled.img`
+    margin-top: -2px;
+    width: 16px;
+    height: 16px;
+  `;
+
+  const NotionA = styled.a`
+    :hover {
+      transition: 0.3s;
+      filter: invert(51%) sepia(27%) saturate(1545%) hue-rotate(183deg)
+        brightness(97%) contrast(111%);
+    }
+  `;
+
   return (
     <StyledFooter>
       <span>©2022 Created by Team OpenZo</span>&nbsp;
@@ -28,6 +41,14 @@ export default function Footer() {
       >
         <GithubOutlined />
       </StyledA>
+      &nbsp;
+      <NotionA
+        href="https://2-now.notion.site/openZo-d13cf04a6aaa4f48a2c5e2f5dccd8bff"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <NotionLogo src="/images/notion-logo.png" />
+      </NotionA>
     </StyledFooter>
   );
 }
