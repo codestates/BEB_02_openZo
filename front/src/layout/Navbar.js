@@ -49,7 +49,7 @@ const StyledSearchInput = styled.div`
 `;
 
 export default function Navbar() {
-  // TODO: Search 기능
+  // TODO: Search 기능 컴포넌트로 분리
   // TODO: connect wallet 시 metamask 연결, myNFT 버튼으로 변경
   // myNFT / connect (icon)
   const handleSearchButton = () => {};

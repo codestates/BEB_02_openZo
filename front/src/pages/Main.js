@@ -5,7 +5,7 @@ export default function Main() {
   return (
     <>
       <Banner></Banner>
-      <div>123</div>
+      {/* <div>123</div> */}
     </>
   );
 }

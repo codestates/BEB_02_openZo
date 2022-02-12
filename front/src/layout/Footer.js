@@ -10,7 +10,7 @@ export default function Footer() {
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: rgba(0, 0, 0, 0.1);
+    /* background-color: rgba(0, 0, 0, 0.1); */
     /* backdrop-filter: blur(10px); */
   `;
 
