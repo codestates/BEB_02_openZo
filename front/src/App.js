@@ -12,6 +12,7 @@ function App() {
   // TODO: 지갑 연결
   // TODO: contract 객체 생성
   // TODO: flex 사용해서 footer 바닥에 붙이기
+  // TODO: font 설정
 
   return (
     <>

@@ -29,7 +29,7 @@ export default function Banner() {
   };
 
   // TODO: NFT 몇개 불러와서 넣어주고 Carousel에 표시
-
+  // TODO: 영상 길이 줄이기 default image로 preload 가능한지 확인
   return (
     <Container>
       <BackgroundWrapper>
