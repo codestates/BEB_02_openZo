@@ -1,5 +1,11 @@
 import React from 'react';
+import Banner from '../components/Banner';
 
 export default function Main() {
-  return <div>Main</div>;
+  return (
+    <>
+      <Banner></Banner>
+      <div>123</div>
+    </>
+  );
 }

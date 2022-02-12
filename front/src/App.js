@@ -1,5 +1,6 @@
 import { Routes, Route } from 'react-router-dom';
 
+import Background from './components/Background';
 import Main from './pages/Main';
 import Navbar from './layout/Navbar';
 import Footer from './layout/Footer';
@@ -12,7 +13,6 @@ function App() {
   return (
     <>
       <Navbar />
-
       <Routes>
         <Route exact path="/" element={<Main />} />
         <Route path="/explore" element={<Explore />} />
@@ -20,7 +20,6 @@ function App() {
         <Route path="/detail/:id" element={<Detail />} />
         <Route path="/mynft" element={<MyNft />} />
       </Routes>
-
       <Footer />
     </>
   );
