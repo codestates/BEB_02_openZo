@@ -2,11 +2,10 @@ import React, { useState } from 'react';
 import { Row, Col, Input, Form, Button } from 'antd';
 import styled from 'styled-components';
 import ProfileBackground from '../components/ProfileBackground';
-import { SendOutlined } from '@ant-design/icons';
+import { SendOutlined, PlusSquareFilled } from '@ant-design/icons';
 
 const HeadSection = styled.h1`
   height: 15vh;
-  /* text-align: center; */
   font-size: 3rem;
   color: rgb(101, 136, 251);
   display: flex;
@@ -18,19 +17,33 @@ const ProfileImageWrapper = styled.div`
   display: flex;
   justify-content: flex-end;
   margin-right: 3rem;
-  /* border: 1px solid; */
 `;
 
 const ProfileInputWrapper = styled.div`
   width: 25vw;
   margin-left: 4rem;
   margin-top: 3rem;
+`;
+
+const ProfileImagePosition = styled.div`
+  position: absolute;
+`;
+
+const StyledLabel = styled.label`
+  position: relative;
+  width: 25vw;
+  height: 50vh;
   /* border: 1px solid; */
+  font-size: 4rem;
+  color: rgba(255, 255, 255, 0.5);
+  /* margin: 0 auto; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 const StyledInput = styled.div`
   border-bottom: 1.5px solid;
-  /* border-right: 1.5px solid; */
   border-color: rgba(57, 102, 249, 0.5);
   margin-top: 1rem;
   margin-bottom: 1.5rem;
@@ -40,12 +53,24 @@ const StyledButton = styled.div`
   display: flex;
   justify-content: flex-end;
   margin-top: -2rem;
+  margin-right: 1rem;
 `;
 const StyledDescription = styled.div``;
 
 export default function Create() {
   // name, description
   // upload 하면 state에 file을 저장할 수 있다.
+  // TODO: Submit 시 require 알림 띄워주기
+  // TODO: onFinish 함수로 control
+  // TODO: issue DB에 넣는 로직
+  // TODO: tx 보내서 contrack storage에 tokenURI 넣는 로직
+  const [image, setImage] = useState(null);
+
+  const onChange = (e) => {
+    setImage(e.target.files[0]);
+  };
+
+  //
 
   return (
     <>
@@ -53,7 +78,13 @@ export default function Create() {
       <Row>
         <Col span={12}>
           <ProfileImageWrapper>
-            <ProfileBackground />
+            <ProfileImagePosition>
+              <ProfileBackground />
+            </ProfileImagePosition>
+            <StyledLabel for="input-file">
+              <PlusSquareFilled />
+            </StyledLabel>
+            <input type="file" id="input-file" style={{ display: 'none' }} />
           </ProfileImageWrapper>
         </Col>
 
@@ -83,19 +114,6 @@ export default function Create() {
               </Form.Item>
             </Form>
           </ProfileInputWrapper>
-          {/* <ProfileInputWrapper>
-            <StyledInput>
-              <Input placeholder="Borderless" bordered={false} />
-            </StyledInput>
-            <div>123</div>
-            <StyledInput>
-              <TextArea
-                placeholder="Borderless"
-                bordered={false}
-                autoSize={{ minRows: 5, maxRows: 5 }}
-              />
-            </StyledInput>
-          </ProfileInputWrapper> */}
         </Col>
       </Row>
     </>

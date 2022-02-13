@@ -20,6 +20,8 @@ function App() {
   const [web3, setWeb3] = useState(null);
   const [nftList, setNftList] = useState([]);
 
+  // TODO: search 시
+
   useEffect(() => {
     return () => {};
   }, []);
@@ -38,6 +40,7 @@ function App() {
         <Route path="/create" element={<Create />} />
         <Route path="/detail/:id" element={<Detail />} />
         <Route path="/mynft" element={<MyNft />} />
+        <Route path="/search" element={<Gallery />} />
       </Routes>
 
       <Footer />
