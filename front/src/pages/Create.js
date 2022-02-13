@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Row, Col, Input, Form, Button } from 'antd';
+import { useNavigate } from 'react-router-dom';
+import { Row, Col, Input, Form, Button, Tooltip, message } from 'antd';
 import styled from 'styled-components';
 import ProfileBackground from '../components/ProfileBackground';
 import { SendOutlined, PlusSquareFilled } from '@ant-design/icons';
@@ -51,39 +52,78 @@ const StyledInput = styled.div`
   border-bottom: 1.5px solid;
   border-color: rgba(57, 102, 249, 0.5);
   margin-top: 1rem;
-  margin-bottom: 1.5rem;
 `;
 
 const StyledButton = styled.div`
   display: flex;
   justify-content: flex-end;
-  margin-top: -2rem;
+  margin-top: 0.5rem;
   margin-right: 1rem;
 `;
-const StyledDescription = styled.div``;
 
-export default function Create() {
+export default function Create({ userAddress }) {
   // TODO: Submit 시 require 알림 띄워주기
   // TODO: onFinish 함수로 control
   // TODO: issue DB에 넣는 로직
   // TODO: tx 보내서 contrack storage에 tokenURI 넣는 로직
   const [image, setImage] = useState(null);
   const [preview, setPreview] = useState(null);
+  const navigate = useNavigate();
 
   const handleImageUpload = (e) => {
+    if (image) URL.revokeObjectURL(image);
+
     const images = e.target.files;
     const imageUrl = URL.createObjectURL(images[0]);
+
     setImage(images[0]);
     setPreview(imageUrl);
+  };
+
+  const handleSubmitFinish = (values) => {
+    if (values.name && image) {
+      console.log(123);
+      const valuesObj = {
+        name: values.name,
+        discription: values.discription ?? '',
+        ipfs: null,
+        address: userAddress,
+      };
+
+      const nftJSON = JSON.stringify(valuesObj);
+
+      fetch('https://api.github.com/repos/2-now/minted-NFT/issues', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: 'token ' + process.env.REACT_APP_GIT_ISSUE_TOKEN,
+        },
+        body: JSON.stringify({
+          title: values.name,
+          body: nftJSON,
+        }),
+      }).then(() => {
+        message.success({
+          content: 'Congratulate to create your NFT !',
+          style: {
+            marginTop: '20vh',
+          },
+        });
+        navigate('/');
+      });
+    } else {
+      if (!image) message.error('required NFT image');
+      if (!values.name) message.error('required NFT name');
+    }
   };
 
   useEffect(() => {
     return () => {
       setPreview(null);
       setImage(null);
+      URL.revokeObjectURL(image);
     };
   }, []);
-  // image 들어오면 icon 없애기
 
   return (
     <>
@@ -95,7 +135,7 @@ export default function Create() {
               <ProfileBackground />
             </ProfileImagePosition>
 
-            <StyledLabel for="input-file">
+            <StyledLabel htmlFor="input-file">
               {preview ? <StyledImage src={preview} /> : <PlusSquareFilled />}
             </StyledLabel>
             <input
@@ -110,13 +150,14 @@ export default function Create() {
 
         <Col span={12}>
           <ProfileInputWrapper>
-            <Form layout="vertical">
-              <Form.Item label="name" required>
+            <Form layout="vertical" onFinish={handleSubmitFinish}>
+              <Form.Item label="name" name="name" required>
                 <StyledInput>
                   <Input placeholder="Write your NFT name" bordered={false} />
                 </StyledInput>
               </Form.Item>
-              <Form.Item label="description">
+              <br />
+              <Form.Item label="description" name="description">
                 <StyledInput>
                   <Input.TextArea
                     placeholder="Describe your NFT"
@@ -127,9 +168,26 @@ export default function Create() {
               </Form.Item>
               <Form.Item>
                 <StyledButton>
-                  <Button shape="round" icon={<SendOutlined />}>
-                    Create
-                  </Button>
+                  {userAddress ? (
+                    <Button
+                      shape="round"
+                      htmlType="submit"
+                      icon={<SendOutlined />}
+                    >
+                      Create
+                    </Button>
+                  ) : (
+                    <Tooltip title="Connect wallet first" color={'red'}>
+                      <Button
+                        shape="round"
+                        htmlType="submit"
+                        disabled
+                        icon={<SendOutlined />}
+                      >
+                        Create
+                      </Button>
+                    </Tooltip>
+                  )}
                 </StyledButton>
               </Form.Item>
             </Form>
