@@ -18,7 +18,7 @@ export default function Footer() {
   `;
 
   const NotionLogo = styled.img`
-    margin-top: -2px;
+    margin-top: -3px;
     width: 16px;
     height: 16px;
   `;
