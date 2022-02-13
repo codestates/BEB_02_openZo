@@ -21,9 +21,6 @@ const ProfileWrapper = styled.div`
 `;
 
 export default function Banner() {
-  // TODO: 사진 받으면 profile에 띄워주고 ( Detail page )
-  // TODO: 사진 없으면 + 버튼 / onclick 시
-
   return (
     <Container>
       <BackgroundWrapper>

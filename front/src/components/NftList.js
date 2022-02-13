@@ -4,7 +4,6 @@ import styled from 'styled-components';
 import NFTCard from './NFTCard';
 
 const NFTCards = styled.div`
-  /* margin-top: 2rem; */
   margin: 0 4rem 0 4rem;
 `;
 const StyledCard = styled.div`
