@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Row, Col, Input, Form, Button } from 'antd';
 import styled from 'styled-components';
 import ProfileBackground from '../components/ProfileBackground';
@@ -29,14 +29,19 @@ const ProfileImagePosition = styled.div`
   position: absolute;
 `;
 
+const StyledImage = styled.img`
+  position: relative;
+  width: 15vw;
+  height: 30vh;
+  object-fit: contain;
+`;
+
 const StyledLabel = styled.label`
   position: relative;
   width: 25vw;
   height: 50vh;
-  /* border: 1px solid; */
   font-size: 4rem;
   color: rgba(255, 255, 255, 0.5);
-  /* margin: 0 auto; */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -58,19 +63,27 @@ const StyledButton = styled.div`
 const StyledDescription = styled.div``;
 
 export default function Create() {
-  // name, description
-  // upload 하면 state에 file을 저장할 수 있다.
   // TODO: Submit 시 require 알림 띄워주기
   // TODO: onFinish 함수로 control
   // TODO: issue DB에 넣는 로직
   // TODO: tx 보내서 contrack storage에 tokenURI 넣는 로직
   const [image, setImage] = useState(null);
+  const [preview, setPreview] = useState(null);
 
-  const onChange = (e) => {
-    setImage(e.target.files[0]);
+  const handleImageUpload = (e) => {
+    const images = e.target.files;
+    const imageUrl = URL.createObjectURL(images[0]);
+    setImage(images[0]);
+    setPreview(imageUrl);
   };
 
-  //
+  useEffect(() => {
+    return () => {
+      setPreview(null);
+      setImage(null);
+    };
+  }, []);
+  // image 들어오면 icon 없애기
 
   return (
     <>
@@ -81,10 +94,17 @@ export default function Create() {
             <ProfileImagePosition>
               <ProfileBackground />
             </ProfileImagePosition>
+
             <StyledLabel for="input-file">
-              <PlusSquareFilled />
+              {preview ? <StyledImage src={preview} /> : <PlusSquareFilled />}
             </StyledLabel>
-            <input type="file" id="input-file" style={{ display: 'none' }} />
+            <input
+              type="file"
+              id="input-file"
+              accept="img/*"
+              onChange={handleImageUpload}
+              style={{ display: 'none' }}
+            />
           </ProfileImageWrapper>
         </Col>
 
