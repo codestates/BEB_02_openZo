@@ -1,7 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Web3 from 'web3';
 import styled from 'styled-components';
-import { Button, Input } from 'antd';
+import { Button, Input, message } from 'antd';
 import {
   SearchOutlined,
   WalletOutlined,
@@ -48,10 +49,23 @@ const StyledSearchInput = styled.div`
   margin-right: 0.3rem;
 `;
 
-export default function Navbar() {
+export default function Navbar({ web3, setUserAddress, setWeb3 }) {
   // TODO: Search 기능 컴포넌트로 분리
   // TODO: connect wallet 시 metamask 연결, myNFT 버튼으로 변경
   // myNFT / connect (icon)
+  const ethEnabled = async () => {
+    try {
+      const accounts = await window.ethereum.request({
+        method: 'eth_requestAccounts',
+      });
+      setUserAddress(accounts[0]);
+      const newWeb3 = new Web3(window.ethereum);
+      setWeb3(newWeb3);
+    } catch {
+      message.error('Fail to connect');
+    }
+  };
+
   const handleSearchButton = () => {};
 
   return (
@@ -76,12 +90,17 @@ export default function Navbar() {
         <Link to="/create">
           <Button type="link">Create</Button>
         </Link>
-        <Button shape="round" icon={<WalletOutlined />}>
-          Connect
-        </Button>
-        {/* <Link to="/mynft">
-          <Button shape="round" icon={<PictureOutlined />}>MyNFTs</Button>
-        </Link> */}
+        {web3 ? (
+          <Link to="/mynft">
+            <Button shape="round" icon={<PictureOutlined />}>
+              MyNFT
+            </Button>
+          </Link>
+        ) : (
+          <Button shape="round" onClick={ethEnabled} icon={<WalletOutlined />}>
+            Connect
+          </Button>
+        )}
       </RightItems>
     </Container>
   );
