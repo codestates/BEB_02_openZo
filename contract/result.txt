@@ -1,0 +1,102 @@
+// truffle migrate --network ropsten 배포결과
+
+
+Compiling your contracts...
+===========================
+> Compiling ./contracts/Migrations.sol
+> Compiling ./contracts/OpzNFTs.sol
+> Compiling @openzeppelin/contracts/access/Ownable.sol
+> Compiling @openzeppelin/contracts/token/ERC721/ERC721.sol
+> Compiling @openzeppelin/contracts/token/ERC721/IERC721.sol
+> Compiling @openzeppelin/contracts/token/ERC721/IERC721Receiver.sol
+> Compiling @openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol
+> Compiling @openzeppelin/contracts/token/ERC721/extensions/IERC721Metadata.sol
+> Compiling @openzeppelin/contracts/utils/Address.sol
+> Compiling @openzeppelin/contracts/utils/Context.sol
+> Compiling @openzeppelin/contracts/utils/Counters.sol
+> Compiling @openzeppelin/contracts/utils/Strings.sol
+> Compiling @openzeppelin/contracts/utils/introspection/ERC165.sol
+> Compiling @openzeppelin/contracts/utils/introspection/IERC165.sol
+> Compilation warnings encountered:
+
+    Warning: Visibility for constructor is ignored. If you want the contract to be non-deployable, making it "abstract" is sufficient.
+  --> project:/contracts/OpzNFTs.sol:14:5:
+   |
+14 |     constructor() public ERC721("OpzNFTs", "OpzNFT") {}
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+> Artifacts written to /Users/progolovego/Documents/yooniquegarage/myProject/BEB_02_openZo/contract/build/contracts
+> Compiled successfully using:
+   - solc: 0.8.11+commit.d7f03943.Emscripten.clang
+
+
+
+Starting migrations...
+======================
+> Network name:    'ropsten'
+> Network id:      3
+> Block gas limit: 8000000 (0x7a1200)
+
+
+1_initial_migration.js
+======================
+
+   Deploying 'Migrations'
+   ----------------------
+   ⠋ Blocks: 0            Seconds: 0   > transaction hash:    0x2131ab764cc698f452a5264e2d861858b443d2be6d07ca36638cc0b80197ac0b
+   ⠼ Blocks: 0            Seconds: 0undefined
+   ⠸ Blocks: 0            Seconds: 5undefined
+   ⠹ Blocks: 0            Seconds: 9undefined
+   ⠋ Blocks: 0            Seconds: 13undefined
+   ⠏ Blocks: 0            Seconds: 17undefined
+   ⠇ Blocks: 0            Seconds: 21undefined
+   ⠧ Blocks: 0            Seconds: 25undefined
+   ⠦ Blocks: 0            Seconds: 29undefined
+   > Blocks: 1            Seconds: 33
+   > contract address:    0x5aE91D75273373C30014BB89643098F155fB1AC9
+   > block number:        11962094
+   > block timestamp:     1644790547
+   > account:             0xA838d543FeC0d556cC4570BC011bCb309264Fc82
+   > balance:             0.385933344601581247
+   > gas used:            250142 (0x3d11e)
+   > gas price:           2.500000009 gwei
+   > value sent:          0 ETH
+   > total cost:          0.000625355002251278 ETH
+
+   Pausing for 2 confirmations...
+
+   -------------------------------
+   > confirmation number: 1 (block: 11962096)
+   > confirmation number: 2 (block: 11962097)
+
+   Deploying 'OpzNFTs'
+   -------------------
+   ⠋ Blocks: 0            Seconds: 0   > transaction hash:    0xfb75c74e1b4dac8a2d7c4e2637d5a875a3b670058a513875f257f2ca06f5e208
+   ⠴ Blocks: 0            Seconds: 0undefined
+   > Blocks: 0            Seconds: 5
+   > contract address:    0xAFAC5881FCa3Aa2Bfd66EB1DB321E9a007648697
+   > block number:        11962098
+   > block timestamp:     1644790613
+   > account:             0xA838d543FeC0d556cC4570BC011bCb309264Fc82
+   > balance:             0.379007672079419095
+   > gas used:            2770269 (0x2a455d)
+   > gas price:           2.500000008 gwei
+   > value sent:          0 ETH
+   > total cost:          0.006925672522162152 ETH
+
+   Pausing for 2 confirmations...
+
+   -------------------------------
+   > confirmation number: 1 (block: 11962100)
+   > confirmation number: 2 (block: 11962101)
+
+   > Saving migration to chain.
+   > Saving artifacts
+   -------------------------------------
+   > Total cost:     0.00755102752441343 ETH
+
+Summary
+=======
+> Total deployments:   2
+> Final cost:          0.00755102752441343 ETH
