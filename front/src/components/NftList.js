@@ -21,7 +21,7 @@ export default function NftList() {
 
   return (
     <NFTCards>
-      <Row gutter={0}>
+      <Row>
         <Col span={6}>
           <StyledCard>
             <NFTCard />

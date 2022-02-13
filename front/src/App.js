@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
 
 import Main from './pages/Main';
@@ -14,6 +15,21 @@ function App() {
   // TODO: flex 사용해서 footer 바닥에 붙이기
   // TODO: font 설정
 
+  // TODO: State : contract, web3, nft list
+  const [contract, setContract] = useState(null);
+  const [web3, setWeb3] = useState(null);
+  const [nftList, setNftList] = useState([]);
+
+  // TODO: search 시
+
+  useEffect(() => {
+    return () => {};
+  }, []);
+
+  useEffect(() => {
+    return () => {};
+  }, []);
+
   return (
     <>
       <Navbar />
@@ -24,6 +40,7 @@ function App() {
         <Route path="/create" element={<Create />} />
         <Route path="/detail/:id" element={<Detail />} />
         <Route path="/mynft" element={<MyNft />} />
+        <Route path="/search" element={<Gallery />} />
       </Routes>
 
       <Footer />
