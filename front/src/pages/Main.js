@@ -1,10 +1,10 @@
 import React from 'react';
-import Banner from '../components/Banner';
+import MainBanner from '../components/MainBanner';
 
 export default function Main() {
   return (
     <>
-      <Banner></Banner>
+      <MainBanner></MainBanner>
     </>
   );
 }
