@@ -2,12 +2,9 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Web3 from 'web3';
 import styled from 'styled-components';
-import { Button, Input, message } from 'antd';
-import {
-  SearchOutlined,
-  WalletOutlined,
-  PictureOutlined,
-} from '@ant-design/icons';
+import { Button, message } from 'antd';
+import { WalletOutlined, PictureOutlined } from '@ant-design/icons';
+import SearchForm from '../components/SearchForm';
 
 const LogoImage = styled.div`
   .logo {
@@ -24,13 +21,6 @@ const Container = styled.div`
   margin: 1rem 1.5rem 0 1.5rem;
 `;
 
-const SearchWrapper = styled.div`
-  display: flex;
-  width: 25rem;
-  margin-bottom: 0.5rem;
-  margin-left: 3.5rem;
-`;
-
 const LeftItems = styled.div`
   display: flex;
 `;
@@ -42,17 +32,12 @@ const RightItems = styled.div`
   justify-content: space-between;
 `;
 
-const StyledSearchInput = styled.div`
-  width: 100%;
-  border-bottom: 1.5px solid;
-  border-color: rgba(57, 102, 249, 0.5);
-  margin-right: 0.3rem;
-`;
-
-export default function Navbar({ web3, setUserAddress, setWeb3 }) {
-  // TODO: Search 기능 컴포넌트로 분리
-  // TODO: connect wallet 시 metamask 연결, myNFT 버튼으로 변경
-  // myNFT / connect (icon)
+export default function Navbar({
+  web3,
+  setUserAddress,
+  setWeb3,
+  setSearchWord,
+}) {
   const ethEnabled = async () => {
     try {
       const accounts = await window.ethereum.request({
@@ -76,12 +61,7 @@ export default function Navbar({ web3, setUserAddress, setWeb3 }) {
             <img className="logo" alt="logo icon" src={'/images/logo.png'} />
           </Link>
         </LogoImage>
-        <SearchWrapper>
-          <StyledSearchInput>
-            <Input placeholder="Search NFTs" bordered={false} />
-          </StyledSearchInput>
-          <Button shape="circle" icon={<SearchOutlined />} />
-        </SearchWrapper>
+        <SearchForm setSearchWord={setSearchWord} />
       </LeftItems>
       <RightItems>
         <Link to="/explore">
