@@ -10,7 +10,7 @@ export default function Gallery() {
 
   return (
     <>
-      <PageBanner text={'Explore'} />
+      <PageBanner text={'Explore NFTs'} />
       <NftList />
     </>
   );
