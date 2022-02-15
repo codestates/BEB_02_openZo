@@ -6,9 +6,8 @@ export default function Search({ searchWord }) {
   return (
     <>
       <SearchBanner
-        text={searchWord ? `"${searchWord}" results` : 'All results'}
+        text={searchWord ? `'${searchWord}' results` : 'All results'}
       />
-      <NftList />
     </>
   );
 }
