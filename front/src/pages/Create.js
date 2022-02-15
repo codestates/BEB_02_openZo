@@ -89,8 +89,6 @@ export default function Create({ userAddress }) {
   };
 
   const handleSubmitFinish = (values) => {
-<<<<<<< HEAD
-=======
     // 현재님 기존로직
     //if (values.name && image) {
     //  console.log(123);
@@ -120,7 +118,7 @@ export default function Create({ userAddress }) {
     //  if (!image) message.error('required NFT image');
     //  if (!values.name) message.error('required NFT name');
     //}
->>>>>>> ae3bd1b (:twisted_rightwards_arrows: mergeAgain)
+
     // ipfs에 image 저장후 URI 받아오기
     console.log(values);
     console.log(image);
