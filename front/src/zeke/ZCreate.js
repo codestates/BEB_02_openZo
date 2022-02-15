@@ -5,6 +5,9 @@ import styled from 'styled-components';
 import ProfileBackground from '../components/banner/ProfileBackground';
 import { CheckOutlined, PlusSquareFilled } from '@ant-design/icons';
 import { create } from 'ipfs-http-client';
+import Web3 from 'web3';
+import abi from '../data/create/abi';
+import contractAddr from '../data/create/contractAddr';
 
 const HeadSection = styled.h1`
   height: 15vh;
@@ -62,7 +65,7 @@ const StyledButton = styled.div`
   margin-right: 1rem;
 `;
 
-export default function Create({ userAddress }) {
+export default function ZCreate({ userAddress }) {
   // TODO: Submit 시 require 알림 띄워주기
   // TODO: onFinish 함수로 control
   // TODO: issue DB에 넣는 로직
