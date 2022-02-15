@@ -1,9 +1,16 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Row, Col, Input, Form, Button, Tooltip, message } from 'antd';
-import styled from 'styled-components';
-import ProfileBackground from '../components/ProfileBackground';
-import { SendOutlined, PlusSquareFilled } from '@ant-design/icons';
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { Row, Col, Input, Form, Button, Tooltip, message } from "antd";
+import styled from "styled-components";
+import ProfileBackground from "../components/ProfileBackground";
+import { SendOutlined, PlusSquareFilled } from "@ant-design/icons";
+import Web3 from "web3";
+// contract
+import abi from "../data/create/abi";
+import contractAddr from "../data/create/contractAddr";
+// ipfs
+import { create } from "ipfs-http-client";
+const ipfs = create({ host: "ipfs.infura.io", port: 5001, protocol: "https" });
 
 const HeadSection = styled.h1`
   height: 15vh;
@@ -68,6 +75,7 @@ export default function Create({ userAddress }) {
   // TODO: tx 보내서 contrack storage에 tokenURI 넣는 로직
   const [image, setImage] = useState(null);
   const [preview, setPreview] = useState(null);
+
   const navigate = useNavigate();
 
   const handleImageUpload = (e) => {
@@ -81,41 +89,81 @@ export default function Create({ userAddress }) {
   };
 
   const handleSubmitFinish = (values) => {
-    if (values.name && image) {
-      console.log(123);
-      const valuesObj = {
-        name: values.name,
-        discription: values.discription ?? '',
-        ipfs: null,
-        address: userAddress,
-      };
-
-      const nftJSON = JSON.stringify(valuesObj);
-
-      fetch('https://api.github.com/repos/2-now/minted-NFT/issues', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: 'token ' + process.env.REACT_APP_GIT_ISSUE_TOKEN,
-        },
-        body: JSON.stringify({
-          title: values.name,
-          body: nftJSON,
-        }),
-      }).then(() => {
-        message.success({
-          content: 'Congratulate to create your NFT !',
-          style: {
-            marginTop: '20vh',
-          },
+    // ipfs에 image 저장후 URI 받아오기
+    console.log(values);
+    console.log(image);
+    const reader = new window.FileReader();
+    reader.readAsArrayBuffer(image);
+    reader.onload = async (e) => {
+      await getHash(Buffer(e.target.result), values)
+        .then((res) => {
+          const metaUri = `https://ipfs.io/ipfs/${res}`;
+          return metaUri;
+        })
+        .then((tokenUri) => {
+          // 여기서 contract.mintNFT하기
         });
-        navigate('/');
-      });
-    } else {
-      if (!image) message.error('required NFT image');
-      if (!values.name) message.error('required NFT name');
+    };
+  };
+
+  const getHash = async (buffer, values) => {
+    try {
+      const uploadResult = await ipfs.add(buffer);
+      if (uploadResult.path) {
+        console.log(`hash: ${uploadResult.path}`);
+        // metadata생성하기
+        const metadata = {
+          description: values.description,
+          image: `https://ipfs.io/ipfs/${uploadResult.path}`,
+          name: values.name,
+        };
+        // metadataURI생성하기
+        const metaURI = ipfs.add(JSON.stringify(metadata)).then((res) => {
+          return res.path;
+        });
+        return metaURI;
+      }
+    } catch (e) {
+      console.log(e);
+      return;
     }
   };
+
+  //if (values.name && image) {
+  //}
+  //  if (values.name && image) {
+  //    console.log(123);
+  //    const valuesObj = {
+  //      name: values.name,
+  //      discription: values.discription ?? "",
+  //      ipfs: null,
+  //      address: userAddress,
+  //    };
+  //    const nftJSON = JSON.stringify(valuesObj);
+  //    fetch("https://api.github.com/repos/2-now/minted-NFT/issues", {
+  //      method: "POST",
+  //      headers: {
+  //        "Content-Type": "application/json",
+  //        Authorization: "token " + process.env.REACT_APP_GIT_ISSUE_TOKEN,
+  //      },
+  //      body: JSON.stringify({
+  //        title: values.name,
+  //        body: nftJSON,
+  //      }),
+  //    }).then(() => {
+  //      message.success({
+  //        content: "Congratulate to create your NFT !",
+  //        style: {
+  //          marginTop: "20vh",
+  //        },
+  //      });
+  //      navigate("/");
+  //    });
+  //  } else {
+  //    if (!image) message.error("required NFT image");
+  //    if (!values.name) message.error("required NFT name");
+  //  }
+  // }
 
   useEffect(() => {
     return () => {
@@ -143,7 +191,7 @@ export default function Create({ userAddress }) {
               id="input-file"
               accept="img/*"
               onChange={handleImageUpload}
-              style={{ display: 'none' }}
+              style={{ display: "none" }}
             />
           </ProfileImageWrapper>
         </Col>
@@ -177,7 +225,7 @@ export default function Create({ userAddress }) {
                       Create
                     </Button>
                   ) : (
-                    <Tooltip title="Connect wallet first" color={'red'}>
+                    <Tooltip title="Connect wallet first" color={"red"}>
                       <Button
                         shape="round"
                         htmlType="submit"
