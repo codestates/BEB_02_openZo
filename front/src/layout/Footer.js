@@ -4,7 +4,7 @@ import { GithubOutlined } from '@ant-design/icons';
 
 const StyledFooter = styled.div`
   width: 100%;
-  height: 3rem;
+  height: 6vh;
   display: flex;
   align-items: center;
   justify-content: center;

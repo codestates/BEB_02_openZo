@@ -6,19 +6,21 @@ import { Button, message } from 'antd';
 import { WalletOutlined, PictureOutlined } from '@ant-design/icons';
 import SearchForm from '../components/SearchForm';
 
+const Container = styled.div`
+  height: 7vh;
+  min-height: 4rem;
+  width: 100vw;
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem 1.5rem 0 1.5rem;
+`;
+
 const LogoImage = styled.div`
   .logo {
-    margin-top: 0.2rem;
-    margin-left: 1rem;
+    margin: 0.2rem 0 0 1rem;
     height: 1.8rem;
     object-fit: cover;
   }
-`;
-
-const Container = styled.div`
-  display: flex;
-  justify-content: space-between;
-  margin: 1rem 1.5rem 0 1.5rem;
 `;
 
 const LeftItems = styled.div`
