@@ -3,8 +3,13 @@ import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import { Row, Col } from "antd";
 
+<<<<<<< HEAD
 import ProfileBackground from "../components/banner/ProfileBackground";
 import TransferModalButton from "../components/detail/TransferModalButton";
+=======
+import ProfileBackground from '../components/banner/ProfileBackground';
+import TransferModalButton from '../components/detail/TransferModalButton';
+>>>>>>> af6982c (:twisted_rightwards_arrows: merge05)
 
 const HeadSection = styled.h1`
   height: 15vh;

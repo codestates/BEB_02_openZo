@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import { Button, message } from 'antd';
 import { WalletOutlined, PictureOutlined } from '@ant-design/icons';
 import SearchForm from '../components/form/SearchForm';
+<<<<<<< HEAD
 
 const Container = styled.div`
   height: 7vh;
@@ -14,6 +15,8 @@ const Container = styled.div`
   justify-content: space-between;
   padding: 1rem 1.5rem 0 1.5rem;
 `;
+=======
+>>>>>>> af6982c (:twisted_rightwards_arrows: merge05)
 
 const Container = styled.div`
   height: 7vh;
