@@ -6,7 +6,6 @@ export default function MyNft() {
   return (
     <>
       <SearchBanner text="My NFT" />
-      <NftList />
     </>
   );
 }
