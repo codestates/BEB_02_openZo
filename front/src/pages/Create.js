@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Row, Col, Input, Form, Button, Tooltip, message } from "antd";
 import styled from "styled-components";
 import ProfileBackground from "../components/ProfileBackground";
-import { SendOutlined, PlusSquareFilled } from "@ant-design/icons";
+import { CheckOutlined, PlusSquareFilled } from "@ant-design/icons";
 import Web3 from "web3";
 // contract
 import abi from "../data/create/abi";
@@ -167,9 +167,9 @@ export default function Create({ userAddress }) {
 
   useEffect(() => {
     return () => {
+      URL.revokeObjectURL(image);
       setPreview(null);
       setImage(null);
-      URL.revokeObjectURL(image);
     };
   }, []);
 
@@ -220,7 +220,7 @@ export default function Create({ userAddress }) {
                     <Button
                       shape="round"
                       htmlType="submit"
-                      icon={<SendOutlined />}
+                      icon={<CheckOutlined />}
                     >
                       Create
                     </Button>
@@ -230,7 +230,7 @@ export default function Create({ userAddress }) {
                         shape="round"
                         htmlType="submit"
                         disabled
-                        icon={<SendOutlined />}
+                        icon={<CheckOutlined />}
                       >
                         Create
                       </Button>
