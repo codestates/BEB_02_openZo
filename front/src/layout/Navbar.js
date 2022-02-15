@@ -15,6 +15,15 @@ const Container = styled.div`
   padding: 1rem 1.5rem 0 1.5rem;
 `;
 
+const Container = styled.div`
+  height: 7vh;
+  min-height: 4rem;
+  width: 100vw;
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem 1.5rem 0 1.5rem;
+`;
+
 const LogoImage = styled.div`
   .logo {
     margin: 0.2rem 0 0 1rem;

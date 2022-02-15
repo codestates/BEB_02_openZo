@@ -1,10 +1,10 @@
-import React from 'react';
-import { useParams } from 'react-router-dom';
-import styled from 'styled-components';
-import { Row, Col } from 'antd';
+import React from "react";
+import { useParams } from "react-router-dom";
+import styled from "styled-components";
+import { Row, Col } from "antd";
 
-import ProfileBackground from '../components/banner/ProfileBackground';
-import TransferModalButton from '../components/detail/TransferModalButton';
+import ProfileBackground from "../components/banner/ProfileBackground";
+import TransferModalButton from "../components/detail/TransferModalButton";
 
 const HeadSection = styled.h1`
   height: 15vh;
