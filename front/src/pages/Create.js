@@ -103,13 +103,7 @@ export default function Create({ userAddress }) {
           body: nftJSON,
         }),
       }).then(() => {
-        message.success({
-          content: 'Congratulate to create your NFT !',
-          style: {
-            marginTop: '20vh',
-          },
-        });
-        navigate('/');
+        navigate('/success');
       });
     } else {
       if (!image) message.error('required NFT image');

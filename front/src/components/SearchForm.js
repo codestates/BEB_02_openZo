@@ -13,6 +13,7 @@ const SearchWrapper = styled.div`
 
 const StyledSearchInput = styled.div`
   width: 100%;
+  height: 2rem;
   border-bottom: 1.5px solid;
   border-color: rgba(57, 102, 249, 0.5);
   margin-right: 0.3rem;
