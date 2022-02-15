@@ -20,6 +20,8 @@ export default function NftList() {
 
   // TODO: Card click 시 detail:id page로 들어가기
   // TODO: page 줄이면 card 줄 수 줄이기
+
+  // TODO: flex wrap으로 refactoring
   const navigate = useNavigate();
 
   const handleClick = (id) => {

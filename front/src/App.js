@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import styled from 'styled-components';
 
+import NFTcontract from '../src/data/contract';
 import Main from './pages/Main';
 import Navbar from './layout/Navbar';
 import Footer from './layout/Footer';
@@ -10,9 +11,9 @@ import Create from './pages/Create';
 import Detail from './pages/Detail';
 import MyNft from './pages/MyNft';
 import Search from './pages/Search';
-import NftList from './components/NftList';
-import NotFound from './components/NotFound';
-import Success from './components/Success';
+import NftList from './components/nft/NftList';
+import NotFound from './components/result/NotFound';
+import Success from './components/result/Success';
 
 const Container = styled.div`
   display: flex;
@@ -41,11 +42,11 @@ function App() {
   useEffect(() => {
     if (web3) {
       // TODO: contract state 생성
-      // const nftContract = new web3.eth.Contract(
-      //   contractAbi,
-      //   '0xEB0cf0EcE4aDA7eb5Bb5ef7D34f6F6449f249cAa'
-      // );
-      // setContract(nftContract);
+      const nftContract = new web3.eth.Contract(
+        NFTcontract.abi,
+        NFTcontract.address
+      );
+      setContract(nftContract);
       // TODO: NFT list state 생성
     }
   }, [web3]);

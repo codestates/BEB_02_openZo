@@ -4,7 +4,7 @@ import Web3 from 'web3';
 import styled from 'styled-components';
 import { Button, message } from 'antd';
 import { WalletOutlined, PictureOutlined } from '@ant-design/icons';
-import SearchForm from '../components/SearchForm';
+import SearchForm from '../components/form/SearchForm';
 
 const Container = styled.div`
   height: 7vh;
