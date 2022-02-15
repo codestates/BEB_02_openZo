@@ -5,6 +5,9 @@ import styled from 'styled-components';
 import ProfileBackground from '../components/banner/ProfileBackground';
 import { CheckOutlined, PlusSquareFilled } from '@ant-design/icons';
 import { create } from 'ipfs-http-client';
+import Web3 from 'web3';
+import abi from '../data/create/abi';
+import contractAddr from '../data/create/contractAddr';
 
 const HeadSection = styled.h1`
   height: 15vh;
