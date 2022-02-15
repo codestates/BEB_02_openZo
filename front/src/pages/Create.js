@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Row, Col, Input, Form, Button, Tooltip, message } from "antd";
 import styled from "styled-components";
-import ProfileBackground from "../components/ProfileBackground";
+import ProfileBackground from "../components/banner/ProfileBackground";
 import { CheckOutlined, PlusSquareFilled } from "@ant-design/icons";
 import Web3 from "web3";
 // contract
@@ -89,6 +89,38 @@ export default function Create({ userAddress }) {
   };
 
   const handleSubmitFinish = (values) => {
+<<<<<<< HEAD
+=======
+    // 현재님 기존로직
+    //if (values.name && image) {
+    //  console.log(123);
+    //  const valuesObj = {
+    //    name: values.name,
+    //    discription: values.discription ?? '',
+    //    ipfs: null,
+    //    address: userAddress,
+    //  };
+
+    //  const nftJSON = JSON.stringify(valuesObj);
+
+    //  fetch('https://api.github.com/repos/2-now/minted-NFT/issues', {
+    //    method: 'POST',
+    //    headers: {
+    //      'Content-Type': 'application/json',
+    //      Authorization: 'token ' + process.env.REACT_APP_GIT_ISSUE_TOKEN,
+    //    },
+    //    body: JSON.stringify({
+    //      title: values.name,
+    //      body: nftJSON,
+    //    }),
+    //  }).then(() => {
+    //    navigate('/success');
+    //  });
+    //} else {
+    //  if (!image) message.error('required NFT image');
+    //  if (!values.name) message.error('required NFT name');
+    //}
+>>>>>>> ae3bd1b (:twisted_rightwards_arrows: mergeAgain)
     // ipfs에 image 저장후 URI 받아오기
     console.log(values);
     console.log(image);
