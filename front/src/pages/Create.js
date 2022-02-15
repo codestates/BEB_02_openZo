@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Row, Col, Input, Form, Button, Tooltip, message } from 'antd';
 import styled from 'styled-components';
-import ProfileBackground from '../components/ProfileBackground';
+import ProfileBackground from '../components/banner/ProfileBackground';
 import { CheckOutlined, PlusSquareFilled } from '@ant-design/icons';
 
 const HeadSection = styled.h1`

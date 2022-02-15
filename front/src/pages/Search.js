@@ -1,6 +1,6 @@
 import React from 'react';
-import SearchBanner from '../components/SearchBanner';
-import NftList from '../components/NftList';
+import SearchBanner from '../components/banner/SearchBanner';
+import NftList from '../components/nft/NftList';
 
 export default function Search({ searchWord }) {
   return (
