@@ -65,7 +65,7 @@ const StyledButton = styled.div`
   margin-right: 1rem;
 `;
 
-export default function Create({ userAddress }) {
+export default function ZCreate({ userAddress }) {
   // TODO: Submit 시 require 알림 띄워주기
   // TODO: onFinish 함수로 control
   // TODO: issue DB에 넣는 로직
