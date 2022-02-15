@@ -1,14 +1,28 @@
 import { useState, useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
+import styled from 'styled-components';
 
 import Main from './pages/Main';
 import Navbar from './layout/Navbar';
 import Footer from './layout/Footer';
-import Gallery from './pages/Gallery';
+import Explore from './pages/Explore';
 import Create from './pages/Create';
 import Detail from './pages/Detail';
 import MyNft from './pages/MyNft';
 import Search from './pages/Search';
+import NftList from './components/NftList';
+import NotFound from './components/NotFound';
+import Success from './components/Success';
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+const ContentWrapper = styled.div`
+  min-height: 87vh;
+  flex: 1;
+`;
 
 function App() {
   // TODO: contract 객체 생성
@@ -41,7 +55,7 @@ function App() {
   }, []);
 
   return (
-    <>
+    <Container>
       <Navbar
         web3={web3}
         setUserAddress={setUserAddress}
@@ -49,17 +63,29 @@ function App() {
         setSearchWord={setSearchWord}
       />
 
-      <Routes>
-        <Route exact path="/" element={<Main />} />
-        <Route path="/explore" element={<Gallery />} />
-        <Route path="/create" element={<Create userAddress={userAddress} />} />
-        <Route path="/detail/:id" element={<Detail />} />
-        <Route path="/mynft" element={<MyNft />} />
-        <Route path="/search" element={<Search searchWord={searchWord} />} />
-      </Routes>
+      <ContentWrapper>
+        <Routes>
+          <Route exact path="/" element={<Main />} />
+          <Route
+            path="/create"
+            element={<Create userAddress={userAddress} />}
+          />
+          <Route path="/detail/:id" element={<Detail />} />
+          <Route element={<NftList />}>
+            <Route path="/explore" element={<Explore />} />
+            <Route path="/mynft" element={<MyNft />} />
+            <Route
+              path="/search"
+              element={<Search searchWord={searchWord} />}
+            />
+          </Route>
+          <Route path="/success" element={<Success />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </ContentWrapper>
 
       <Footer />
-    </>
+    </Container>
   );
 }
 
