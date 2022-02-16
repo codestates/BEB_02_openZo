@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Web3 from 'web3';
 import styled from 'styled-components';
 import { Button, message } from 'antd';
 import { WalletOutlined, PictureOutlined } from '@ant-design/icons';
@@ -34,26 +33,17 @@ const RightItems = styled.div`
   justify-content: space-between;
 `;
 
-export default function Navbar({
-  web3,
-  setUserAddress,
-  setWeb3,
-  setSearchWord,
-}) {
-  const ethEnabled = async () => {
+export default function Navbar({ web3, ethEnabled, setSearchWord }) {
+  const handleSearchButton = () => {};
+
+  const handleConnectButton = async () => {
     try {
-      const accounts = await window.ethereum.request({
-        method: 'eth_requestAccounts',
-      });
-      setUserAddress(accounts[0]);
-      const newWeb3 = new Web3(window.ethereum);
-      setWeb3(newWeb3);
+      await ethEnabled();
+      message.success('Wallet connected !');
     } catch {
       message.error('Fail to connect');
     }
   };
-
-  const handleSearchButton = () => {};
 
   return (
     <Container>
@@ -79,7 +69,11 @@ export default function Navbar({
             </Button>
           </Link>
         ) : (
-          <Button shape="round" onClick={ethEnabled} icon={<WalletOutlined />}>
+          <Button
+            shape="round"
+            onClick={handleConnectButton}
+            icon={<WalletOutlined />}
+          >
             Connect
           </Button>
         )}
