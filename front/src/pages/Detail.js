@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import { Row, Col } from 'antd';
@@ -18,6 +18,24 @@ const ProfileWrapper = styled.div`
   display: flex;
   justify-content: flex-end;
   margin-right: 3rem;
+`;
+
+const ProfilePosition = styled.div`
+  position: absolute;
+`;
+
+const ProfileImagePosition = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const ProfileImage = styled.img`
+  position: relative;
+  object-fit: contain;
+  padding: 5rem 2rem 5rem 2rem;
+  width: 25vw;
+  height: 50vh;
 `;
 
 const DescriptionWrapper = styled.div`
@@ -43,22 +61,38 @@ const StyledBy = styled.div`
   color: rgba(0, 0, 0, 0.4);
 `;
 
-export default function Detail() {
+export default function Detail({ nftList, setSelectedNft }) {
   const params = useParams();
 
   const handleTransferClick = () => {
     // modal transfer
   };
 
+  useEffect(() => {
+    return () => {
+      setSelectedNft({});
+    };
+  }, []);
+
+  const { tokenOwner, tokenId, metadata } = nftList[params.id];
+  console.log(metadata);
+  const { description, image, name } = metadata;
+
   return (
     <>
-      <HeadSection>Name #number</HeadSection>
+      <HeadSection>
+        {name} #{tokenId}
+      </HeadSection>
 
       <Row>
         <Col span={12}>
           <ProfileWrapper>
-            <ProfileBackground />
-            {/* profile 이미지 */}
+            <ProfilePosition>
+              <ProfileBackground />
+            </ProfilePosition>
+            <ProfileImagePosition>
+              <ProfileImage src={image} />
+            </ProfileImagePosition>
           </ProfileWrapper>
         </Col>
 
@@ -67,21 +101,16 @@ export default function Detail() {
             <StyledBy>
               <span>ownered by</span>
               <br />
-              <span>0x7F8c72AdEa14269A2c8291de1B24C4e3B1657aab</span>
+              <span>{tokenOwner}</span>
               {/* <span>created by ...</span>
               <br /> */}
             </StyledBy>
-            <StyledDescriptionHeader>discription</StyledDescriptionHeader>
+            <StyledDescriptionHeader>description</StyledDescriptionHeader>
             <StyledDescriptionContent>
-              <p>
-                lorem ipsum dolor sit amet, consectetur adipislorem ipsum dolor
-                sit amet, consectetur adipislorem ipsum dolor sit amet,
-                consectetlor sit amet, consectetur adipislorem ipsum dolor sit
-                amet, consectetur adipislorem ipsum dolor sit amet, consectet
-              </p>
+              <p>{description}</p>
             </StyledDescriptionContent>
 
-            <TransferModalButton />
+            <TransferModalButton tokenOwner={tokenOwner} />
           </DescriptionWrapper>
         </Col>
       </Row>

@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { Row, Col, Input, Form, Button, Tooltip, message } from "antd";
-import styled from "styled-components";
-import ProfileBackground from "../components/banner/ProfileBackground";
-import { CheckOutlined, PlusSquareFilled } from "@ant-design/icons";
-import { create } from "ipfs-http-client";
-import contractAddr from "../data/create/contractAddr";
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { Row, Col, Input, Form, Button, Tooltip, message } from 'antd';
+import styled from 'styled-components';
+import ProfileBackground from '../components/banner/ProfileBackground';
+import { CheckOutlined, PlusSquareFilled } from '@ant-design/icons';
+import { create } from 'ipfs-http-client';
+import contractAddr from '../data/create/contractAddr';
 
 const HeadSection = styled.h1`
   height: 15vh;
@@ -86,9 +86,9 @@ export default function Create({ userAddress, contract, web3 }) {
     if (values.name && image) {
       // ipfs 설정
       const ipfs = create({
-        host: "ipfs.infura.io",
+        host: 'ipfs.infura.io',
         port: 5001,
-        protocol: "https",
+        protocol: 'https',
       });
       // img파일 읽어서 ipfs통해 CID 받아오는 과정
       const reader = new window.FileReader();
@@ -117,7 +117,7 @@ export default function Create({ userAddress, contract, web3 }) {
             console.log(`hash: ${uploadResult.path}`);
             // metadata생성하기
             const metadata = {
-              description: values.description ?? "",
+              description: values.description ?? '',
               image: `https://ipfs.io/ipfs/${uploadResult.path}`,
               name: values.name,
             };
@@ -136,7 +136,7 @@ export default function Create({ userAddress, contract, web3 }) {
 
       // NFT 컨트랙트 실행
       const sendTransaction = async (tokenUri) => {
-        const nonce = await web3.eth.getTransactionCount(userAddress, "latest");
+        const nonce = await web3.eth.getTransactionCount(userAddress, 'latest');
         const tx = {
           from: userAddress,
           to: contractAddr,
@@ -159,17 +159,17 @@ export default function Create({ userAddress, contract, web3 }) {
             console.log(err);
           });
 
-        await message.success({
-          content: "Congratulate to create your NFT !",
+        message.success({
+          content: 'Congratulate to create your NFT !',
           style: {
-            marginTop: "20vh",
+            marginTop: '20vh',
           },
         });
-        navigate("/");
+        navigate('/');
       };
     } else {
-      if (!image) message.error("required NFT image");
-      if (!values.name) message.error("required NFT name");
+      if (!image) message.error('required NFT image');
+      if (!values.name) message.error('required NFT name');
     }
   };
 
@@ -199,7 +199,7 @@ export default function Create({ userAddress, contract, web3 }) {
               id="input-file"
               accept="img/*"
               onChange={handleImageUpload}
-              style={{ display: "none" }}
+              style={{ display: 'none' }}
             />
           </ProfileImageWrapper>
         </Col>
@@ -233,7 +233,7 @@ export default function Create({ userAddress, contract, web3 }) {
                       Create
                     </Button>
                   ) : (
-                    <Tooltip title="Connect wallet first" color={"red"}>
+                    <Tooltip title="Connect wallet first" color={'red'}>
                       <Button
                         shape="round"
                         htmlType="submit"

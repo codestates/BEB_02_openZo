@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Carousel } from 'antd';
 import styled from 'styled-components';
 import Background from './Background';
@@ -16,20 +16,39 @@ const BackgroundWrapper = styled.div`
 const CarouselWrapper = styled.div`
   position: relative;
   height: 85vh;
+
   backdrop-filter: blur(10px);
 `;
 
-export default function MainBanner() {
-  const contentStyle = {
-    height: '100%',
-    color: '#fff',
-    lineHeight: '85vh',
-    textAlign: 'center',
-    background: 'rgba(0,0,0,0.3)',
-  };
+const CarouselCard = styled.div`
+  height: 85vh;
+  width: 100vw;
+  line-height: 85vh;
+`;
 
-  // TODO: NFT 몇개 불러와서 넣어주고 Carousel에 표시
+const StyledImageDiv = styled.div`
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const StyledImage = styled.img`
+  height: 30vw;
+  object-fit: contain;
+  /* width: 75; */
+`;
+
+export default function MainBanner({ nftList }) {
   // TODO: 영상 길이 줄이기 default image로 preload 가능한지 확인
+  const [recentNftList, setRecentNftList] = useState([]);
+
+  useEffect(() => {
+    const recent = nftList?.slice(-4);
+    if (recent) setRecentNftList([...recent]);
+  }, [nftList]);
+
   return (
     <Container>
       <BackgroundWrapper>
@@ -37,18 +56,17 @@ export default function MainBanner() {
       </BackgroundWrapper>
       <CarouselWrapper>
         <Carousel>
-          <div>
-            <h3 style={contentStyle}>1</h3>
-          </div>
-          <div>
-            <h3 style={contentStyle}>2</h3>
-          </div>
-          <div>
-            <h3 style={contentStyle}>3</h3>
-          </div>
-          <div>
-            <h3 style={contentStyle}>4</h3>
-          </div>
+          {recentNftList.map((nft, i) => {
+            if (i > 5) return;
+            const src = nft.metadata.image;
+            return (
+              <CarouselCard key={i}>
+                <StyledImageDiv>
+                  <StyledImage src={src} />
+                </StyledImageDiv>
+              </CarouselCard>
+            );
+          })}
         </Carousel>
       </CarouselWrapper>
     </Container>

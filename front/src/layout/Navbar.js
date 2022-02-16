@@ -33,8 +33,28 @@ const RightItems = styled.div`
   justify-content: space-between;
 `;
 
-export default function Navbar({ web3, ethEnabled, setSearchWord }) {
-  const handleSearchButton = () => {};
+export default function Navbar({
+  web3,
+  ethEnabled,
+  nftList,
+  setSearchWord,
+  setViewList,
+}) {
+  const handleExploreLink = () => {
+    setViewList(nftList);
+  };
+
+  const handleMyNftLink = () => {
+    console.log(window.ethereum.selectedAddress);
+    const viewNft = nftList.filter(
+      (nft) =>
+        window.ethereum.selectedAddress.toLowerCase() ===
+        nft.tokenOwner.toLowerCase()
+    );
+
+    console.log(viewNft);
+    setViewList(viewNft);
+  };
 
   const handleConnectButton = async () => {
     try {
@@ -53,18 +73,28 @@ export default function Navbar({ web3, ethEnabled, setSearchWord }) {
             <img className="logo" alt="logo icon" src={'/images/logo.png'} />
           </Link>
         </LogoImage>
-        <SearchForm setSearchWord={setSearchWord} />
+        <SearchForm
+          nftList={nftList}
+          setSearchWord={setSearchWord}
+          setViewList={setViewList}
+        />
       </LeftItems>
       <RightItems>
         <Link to="/explore">
-          <Button type="link">Explore</Button>
+          <Button type="link" onClick={handleExploreLink}>
+            Explore
+          </Button>
         </Link>
         <Link to="/create">
           <Button type="link">Create</Button>
         </Link>
         {web3 ? (
           <Link to="/mynft">
-            <Button shape="round" icon={<PictureOutlined />}>
+            <Button
+              shape="round"
+              onClick={handleMyNftLink}
+              icon={<PictureOutlined />}
+            >
               MyNFT
             </Button>
           </Link>
