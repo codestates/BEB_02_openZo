@@ -1,5 +1,5 @@
 export default {
-  address: '0x1cEaCdc016e49C8474969d3037FbAAF9ae1EC54a',
+  address: '0x8F02CF84C71081e312FaC55Ba6F92685E2005E71',
   abi: [
     { inputs: [], stateMutability: 'nonpayable', type: 'constructor' },
     {
