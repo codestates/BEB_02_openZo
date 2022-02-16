@@ -123,6 +123,7 @@ export default function Create({ userAddress, contract, web3 }) {
             };
             // metadataURI생성하기
             const metaURI = ipfs.add(JSON.stringify(metadata)).then((res) => {
+              console.log(`metaUri: ${res.path}`);
               return res.path;
             });
             return metaURI;
@@ -140,17 +141,22 @@ export default function Create({ userAddress, contract, web3 }) {
           from: userAddress,
           to: contractAddr,
           nonce: nonce,
-          gas: 100000,
+          gas: 300000,
           data: contract.methods.mintNFT(userAddress, tokenUri).encodeABI(),
         };
         // mintNFT
-        await web3.eth.sendTransaction(tx);
-        // getTokenId
-        await contract.methods
-          .getTokenId()
-          .call()
-          .then((tokenId) => {
-            console.log(tokenId);
+        await web3.eth
+          .sendTransaction(tx)
+          .then((res) => {
+            console.log(res);
+            const tokenId = contract.methods.getTokenId().call();
+            return tokenId;
+          })
+          .then((res) => {
+            console.log(`tokenId: ${res}`);
+          })
+          .catch((err) => {
+            console.log(err);
           });
 
         await message.success({
