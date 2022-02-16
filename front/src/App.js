@@ -15,6 +15,7 @@ import Search from './pages/Search';
 import NftList from './components/nft/NftList';
 import NotFound from './components/result/NotFound';
 import Success from './components/result/Success';
+import Loading from './components/result/Loading';
 
 const Container = styled.div`
   display: flex;
@@ -40,6 +41,7 @@ function App() {
   const [searchedNftList, setSearchedNftList] = useState([]);
   const [userAddress, setUserAddress] = useState('');
   const [searchWord, setSearchWord] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
   const ethEnabled = async () => {
     const accounts = await window.ethereum.request({
@@ -53,24 +55,20 @@ function App() {
   const updateNFTlist = async (contract) => {
     const totalSupply = await contract.methods.totalSupply().call();
 
-    const arr = [];
-    for (let i = 1; i <= totalSupply; i++) {
-      arr.push(i);
-    }
+    const arr = Array(Number(totalSupply))
+      .fill(1)
+      .map((x, y) => x + y);
 
-    for (const tokenId of arr) {
+    setIsLoading(true);
+    for await (const tokenId of arr) {
       const tokenOwner = await contract.methods.ownerOf(tokenId).call();
       const tokenURI = await contract.methods.tokenURI(tokenId).call();
       const metadata = await fetch(tokenURI).then((res) => res.json());
       setNftList((prevState) => {
         return [...prevState, { tokenOwner, tokenId, metadata }];
       });
-      if (tokenOwner === window.ethereum.selectedAddress) {
-        setMyNftList((prevState) => {
-          return [...prevState, { tokenOwner, tokenId, metadata }];
-        });
-      }
     }
+    setIsLoading(false);
   };
 
   // TODO: search 시 Gallery로 filtered List 보내주고 view 하게 하기
@@ -83,7 +81,6 @@ function App() {
     if (window.ethereum.selectedAddress) ethEnabled();
     return () => {
       setNftList([]);
-      setMyNftList([]);
     };
   }, []);
 
@@ -117,43 +114,47 @@ function App() {
       />
 
       <ContentWrapper>
-        <Routes>
-          <Route exact path="/" element={<Main />} />
-          <Route
-            path="/create"
-            element={
-              <Create
-                contract={contract}
-                userAddress={userAddress}
-                web3={web3}
-              />
-            }
-          />
-          <Route
-            path="/detail/:id"
-            element={
-              <Detail
-                nftList={nftList}
-                selectedNft={selectedNft}
-                setSelectedNft={setSelectedNft}
-              />
-            }
-          />
-          <Route
-            element={
-              <NftList viewList={viewList} setSelectedNft={setSelectedNft} />
-            }
-          >
-            <Route path="/explore" element={<Explore />} />
-            <Route path="/mynft" element={<MyNft />} />
+        {isLoading ? (
+          <Loading />
+        ) : (
+          <Routes>
+            <Route exact path="/" element={<Main nftList={nftList} />} />
             <Route
-              path="/search"
-              element={<Search searchWord={searchWord} />}
+              path="/create"
+              element={
+                <Create
+                  contract={contract}
+                  userAddress={userAddress}
+                  web3={web3}
+                />
+              }
             />
-          </Route>
-          <Route path="/success" element={<Success />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
+            <Route
+              path="/detail/:id"
+              element={
+                <Detail
+                  nftList={nftList}
+                  selectedNft={selectedNft}
+                  setSelectedNft={setSelectedNft}
+                />
+              }
+            />
+            <Route
+              element={
+                <NftList viewList={viewList} setSelectedNft={setSelectedNft} />
+              }
+            >
+              <Route path="/explore" element={<Explore />} />
+              <Route path="/mynft" element={<MyNft />} />
+              <Route
+                path="/search"
+                element={<Search searchWord={searchWord} />}
+              />
+            </Route>
+            <Route path="/success" element={<Success />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        )}
       </ContentWrapper>
 
       <Footer />

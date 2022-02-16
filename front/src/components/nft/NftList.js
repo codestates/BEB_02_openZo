@@ -8,6 +8,7 @@ const NFTCards = styled.div`
   width: 100%;
   padding: 2rem 8.5rem 8rem 8.5rem;
 `;
+
 const StyledCard = styled.div`
   display: flex;
   justify-content: center;

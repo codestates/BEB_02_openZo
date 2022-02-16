@@ -6,7 +6,6 @@ import styled from 'styled-components';
 const StyledTransferButton = styled.div`
   display: flex;
   justify-content: flex-end;
-
   margin: 2rem 1.5rem 0 0;
 `;
 
