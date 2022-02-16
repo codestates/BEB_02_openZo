@@ -45,15 +45,14 @@ function App() {
     });
     setUserAddress(accounts[0]);
     const newWeb3 = new Web3(window.ethereum);
-    console.log(newWeb3);
     setWeb3(newWeb3);
   };
 
   // TODO: search 시 Gallery로 filtered List 보내주고 view 하게 하기
 
-  useEffect(() => {
+  useEffect(async () => {
     console.log(window.ethereum);
-    console.log(window.ethereum.selectedAddress);
+    console.log(await window.ethereum.selectedAddress);
     if (window.ethereum.selectedAddress) ethEnabled();
   }, []);
 
@@ -84,14 +83,14 @@ function App() {
       <ContentWrapper>
         <Routes>
           <Route exact path="/" element={<Main />} />
-          {/* <Route
-            path="/create"
-            element={<Create userAddress={userAddress} />}
-          /> */}
           <Route
             path="/create"
-            element={<ZCreate userAddress={userAddress} />}
+            element={<Create userAddress={userAddress} />}
           />
+          {/* <Route
+            path="/create"
+            element={<ZCreate userAddress={userAddress} />}
+          /> */}
           <Route path="/detail/:id" element={<Detail />} />
           <Route element={<NftList />}>
             <Route path="/explore" element={<Explore />} />

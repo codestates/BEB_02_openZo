@@ -83,13 +83,6 @@ export default function Create({ userAddress }) {
 
   const handleSubmitFinish = (values) => {
     if (values.name && image) {
-      const valuesObj = {
-        name: values.name,
-        discription: values.discription ?? '',
-        ipfs: null,
-        address: userAddress,
-      };
-
       const ipfs = create({
         host: 'ipfs.infura.io',
         port: 5001,
@@ -97,11 +90,13 @@ export default function Create({ userAddress }) {
       });
 
       const reader = new window.FileReader();
+
       reader.readAsArrayBuffer(image);
       reader.onload = async (e) => {
         await getHash(Buffer(e.target.result), values)
           .then((res) => {
             const metaUri = `https://ipfs.io/ipfs/${res}`;
+            console.log(metaUri);
             return metaUri;
           })
           .then((tokenUri) => {
@@ -112,11 +107,12 @@ export default function Create({ userAddress }) {
       const getHash = async (buffer, values) => {
         try {
           const uploadResult = await ipfs.add(buffer);
+
           if (uploadResult.path) {
             console.log(`hash: ${uploadResult.path}`);
             // metadata생성하기
             const metadata = {
-              description: values.description,
+              description: values.description ?? '',
               image: `https://ipfs.io/ipfs/${uploadResult.path}`,
               name: values.name,
             };
