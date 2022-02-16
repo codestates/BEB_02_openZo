@@ -1,27 +1,29 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Card } from 'antd';
 import styled from 'styled-components';
 
-const StyledCard = styled.div`
-  width: 100%;
-  height: 100%;
-`;
-
-export default function NFTCard() {
+export default function NFTCard({
+  image,
+  name,
+  tokenId,
+  description,
+  setSelectedNft,
+}) {
   const { Meta } = Card;
 
   return (
-    <Card
-      hoverable
-      style={{ width: 240 }}
-      cover={
-        <img
-          alt="example"
-          src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png"
-        />
-      }
-    >
-      <Meta title="Europe Street beat" description="www.instagram.com" />
-    </Card>
+    <Link to={`/detail/${tokenId - 1}`}>
+      <Card
+        hoverable
+        onClick={() => {
+          setSelectedNft(tokenId - 1);
+        }}
+        style={{ width: 240 }}
+        cover={<img src={image} />}
+      >
+        <Meta title={`${name} #${tokenId}`} description={description} />
+      </Card>
+    </Link>
   );
 }

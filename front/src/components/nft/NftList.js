@@ -1,5 +1,5 @@
-import React from 'react';
-import { Outlet, useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Outlet, useNavigate, useLocation } from 'react-router-dom';
 import { Col, Row } from 'antd';
 import styled from 'styled-components';
 import NFTCard from './NFTCard';
@@ -14,18 +14,33 @@ const StyledCard = styled.div`
   margin-top: 5rem;
 `;
 
-export default function NftList() {
-  // TODO: App -> Gallery -> NftList
-  // TODO: nft list 받아서 map으로 표시해주기
+export default function NftList({
+  nftList,
+  searchedNftList,
+  myNftList,
+  setSelectedNft,
+}) {
+  const location = useLocation();
+  const { pathname } = location;
 
-  // TODO: Card click 시 detail:id page로 들어가기
-  // TODO: page 줄이면 card 줄 수 줄이기
-
-  // TODO: flex wrap으로 refactoring
-  const navigate = useNavigate();
-
-  const handleClick = (id) => {
-    navigate('/detail/' + id);
+  const mapList = (list) => {
+    list.map((nft) => {
+      const { metadata, tokenId } = nft;
+      return (
+        <Col span={6}>
+          <StyledCard>
+            <NFTCard
+              key={tokenId}
+              image={metadata.image}
+              name={metadata.name}
+              tokenId={tokenId}
+              description={metadata.description}
+              setSelectedNft={setSelectedNft}
+            />
+          </StyledCard>
+        </Col>
+      );
+    });
   };
 
   return (
@@ -33,36 +48,27 @@ export default function NftList() {
       <Outlet />
       <NFTCards>
         <Row>
-          <Col span={6}>
-            <StyledCard>
-              <NFTCard />
-            </StyledCard>
-          </Col>
-          <Col span={6}>
-            <StyledCard>
-              <NFTCard />
-            </StyledCard>
-          </Col>
-          <Col span={6}>
-            <StyledCard>
-              <NFTCard />
-            </StyledCard>
-          </Col>
-          <Col span={6}>
-            <StyledCard>
-              <NFTCard />
-            </StyledCard>
-          </Col>
-          <Col span={6}>
-            <StyledCard>
-              <NFTCard />
-            </StyledCard>
-          </Col>
-          <Col span={6}>
-            <StyledCard>
-              <NFTCard />
-            </StyledCard>
-          </Col>
+          {pathname === '/explore' && mapList(nftList)}
+          {pathname === '/search' && mapList(searchedNftList)}
+          {pathname === '/mynft' && mapList(myNftList)}
+          {/* 
+          {list.map((nft) => {
+            const { metadata, tokenId } = nft;
+            return (
+              <Col span={6}>
+                <StyledCard>
+                  <NFTCard
+                    key={tokenId}
+                    image={metadata.image}
+                    name={metadata.name}
+                    tokenId={tokenId}
+                    description={metadata.description}
+                    setSelectedNft={setSelectedNft}
+                  />
+                </StyledCard>
+              </Col>
+            );
+          })} */}
         </Row>
       </NFTCards>
     </>
