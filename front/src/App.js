@@ -85,7 +85,7 @@ function App() {
           <Route exact path="/" element={<Main />} />
           <Route
             path="/create"
-            element={<Create userAddress={userAddress} />}
+            element={<Create contract={contract} userAddress={userAddress} />}
           />
           {/* <Route
             path="/create"
