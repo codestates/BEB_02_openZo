@@ -55,7 +55,7 @@ export default function MainBanner({ nftList }) {
         <Background />
       </BackgroundWrapper>
       <CarouselWrapper>
-        <Carousel autoplay>
+        <Carousel>
           {recentNftList.map((nft, i) => {
             if (i > 5) return;
             const src = nft.metadata.image;
