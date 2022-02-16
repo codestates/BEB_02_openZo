@@ -14,45 +14,13 @@ const StyledCard = styled.div`
   margin-top: 5rem;
 `;
 
-export default function NftList({
-  nftList,
-  searchedNftList,
-  myNftList,
-  setSelectedNft,
-}) {
-  const location = useLocation();
-  const { pathname } = location;
-
-  const mapList = (list) => {
-    list.map((nft) => {
-      const { metadata, tokenId } = nft;
-      return (
-        <Col span={6}>
-          <StyledCard>
-            <NFTCard
-              key={tokenId}
-              image={metadata.image}
-              name={metadata.name}
-              tokenId={tokenId}
-              description={metadata.description}
-              setSelectedNft={setSelectedNft}
-            />
-          </StyledCard>
-        </Col>
-      );
-    });
-  };
-
+export default function NftList({ viewList, setSelectedNft }) {
   return (
     <>
       <Outlet />
       <NFTCards>
         <Row>
-          {pathname === '/explore' && mapList(nftList)}
-          {pathname === '/search' && mapList(searchedNftList)}
-          {pathname === '/mynft' && mapList(myNftList)}
-          {/* 
-          {list.map((nft) => {
+          {viewList.map((nft) => {
             const { metadata, tokenId } = nft;
             return (
               <Col span={6}>
@@ -68,7 +36,7 @@ export default function NftList({
                 </StyledCard>
               </Col>
             );
-          })} */}
+          })}
         </Row>
       </NFTCards>
     </>

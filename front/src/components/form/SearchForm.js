@@ -19,7 +19,7 @@ const StyledSearchInput = styled.div`
   margin-right: 0.3rem;
 `;
 
-export default function SearchForm({ setSearchWord }) {
+export default function SearchForm({ nftList, setSearchWord, setViewList }) {
   const [searchInput, setSearchInput] = useState('');
 
   const handleInputChange = (e) => {
@@ -27,6 +27,10 @@ export default function SearchForm({ setSearchWord }) {
   };
 
   const handleClick = () => {
+    const viewList = nftList.filter((nft) =>
+      nft.metadata.name.includes(searchInput)
+    );
+    setViewList(viewList);
     setSearchWord(searchInput);
     setSearchInput('');
   };
@@ -35,7 +39,7 @@ export default function SearchForm({ setSearchWord }) {
     <SearchWrapper>
       <StyledSearchInput>
         <Input
-          placeholder="Search NFTs"
+          placeholder="search your nft name"
           bordered={false}
           value={searchInput}
           onChange={handleInputChange}

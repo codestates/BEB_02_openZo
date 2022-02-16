@@ -63,8 +63,6 @@ const StyledBy = styled.div`
 
 export default function Detail({ nftList, setSelectedNft }) {
   const params = useParams();
-  console.log(params);
-  console.log(nftList[params.id]);
 
   const handleTransferClick = () => {
     // modal transfer
@@ -112,7 +110,7 @@ export default function Detail({ nftList, setSelectedNft }) {
               <p>{description}</p>
             </StyledDescriptionContent>
 
-            <TransferModalButton />
+            <TransferModalButton tokenOwner={tokenOwner} />
           </DescriptionWrapper>
         </Col>
       </Row>

@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import ProfileBackground from '../components/banner/ProfileBackground';
 import { CheckOutlined, PlusSquareFilled } from '@ant-design/icons';
 import { create } from 'ipfs-http-client';
+import contractAddr from '../data/create/contractAddr';
 
 const HeadSection = styled.h1`
   height: 15vh;
@@ -62,7 +63,7 @@ const StyledButton = styled.div`
   margin-right: 1rem;
 `;
 
-export default function Create({ userAddress }) {
+export default function Create({ userAddress, contract, web3 }) {
   // TODO: Submit 시 require 알림 띄워주기
   // TODO: onFinish 함수로 control
   // TODO: issue DB에 넣는 로직
@@ -83,27 +84,31 @@ export default function Create({ userAddress }) {
 
   const handleSubmitFinish = (values) => {
     if (values.name && image) {
+      // ipfs 설정
       const ipfs = create({
         host: 'ipfs.infura.io',
         port: 5001,
         protocol: 'https',
       });
-
+      // img파일 읽어서 ipfs통해 CID 받아오는 과정
       const reader = new window.FileReader();
-
       reader.readAsArrayBuffer(image);
       reader.onload = async (e) => {
         await getHash(Buffer(e.target.result), values)
           .then((res) => {
             const metaUri = `https://ipfs.io/ipfs/${res}`;
-            console.log(metaUri);
             return metaUri;
           })
           .then((tokenUri) => {
-            // 여기서 contract.mintNFT하기
-          });
+            // mint함수 부르기
+            if (tokenUri) {
+              sendTransaction(tokenUri);
+            }
+          })
+          .catch((err) => alert(err));
       };
 
+      // ipfs로 tokenUri 생성
       const getHash = async (buffer, values) => {
         try {
           const uploadResult = await ipfs.add(buffer);
@@ -118,6 +123,7 @@ export default function Create({ userAddress }) {
             };
             // metadataURI생성하기
             const metaURI = ipfs.add(JSON.stringify(metadata)).then((res) => {
+              console.log(`metaUri: ${res.path}`);
               return res.path;
             });
             return metaURI;
@@ -128,14 +134,39 @@ export default function Create({ userAddress }) {
         }
       };
 
-      message.success({
-        content: 'Congratulate to create your NFT !',
-        style: {
-          marginTop: '20vh',
-        },
-      });
+      // NFT 컨트랙트 실행
+      const sendTransaction = async (tokenUri) => {
+        const nonce = await web3.eth.getTransactionCount(userAddress, 'latest');
+        const tx = {
+          from: userAddress,
+          to: contractAddr,
+          nonce: nonce,
+          gas: 300000,
+          data: contract.methods.mintNFT(userAddress, tokenUri).encodeABI(),
+        };
+        // mintNFT
+        await web3.eth
+          .sendTransaction(tx)
+          .then((res) => {
+            console.log(res);
+            const tokenId = contract.methods.getTokenId().call();
+            return tokenId;
+          })
+          .then((res) => {
+            console.log(`tokenId: ${res}`);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
 
-      navigate('/');
+        message.success({
+          content: 'Congratulate to create your NFT !',
+          style: {
+            marginTop: '20vh',
+          },
+        });
+        navigate('/');
+      };
     } else {
       if (!image) message.error('required NFT image');
       if (!values.name) message.error('required NFT name');

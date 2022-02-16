@@ -16,7 +16,7 @@ const StyledAddress = styled.div`
   margin-top: 1rem;
 `;
 
-export default function TransferModalButton() {
+export default function TransferModalButton({ tokenOwner }) {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [toAddress, setToAddress] = useState('');
 
@@ -38,9 +38,12 @@ export default function TransferModalButton() {
   return (
     <>
       <StyledTransferButton>
-        <Button shape="round" icon={<SendOutlined />} onClick={showModal}>
-          Transfer
-        </Button>
+        {tokenOwner.toLowerCase() ===
+          window.ethereum.selectedAddress.toLowerCase() && (
+          <Button shape="round" icon={<SendOutlined />} onClick={showModal}>
+            Transfer
+          </Button>
+        )}
       </StyledTransferButton>
       <Modal
         title="Transfer NFT"

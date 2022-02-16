@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Routes, Route, useLocation } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import styled from 'styled-components';
 import Web3 from 'web3';
 
@@ -15,7 +15,6 @@ import Search from './pages/Search';
 import NftList from './components/nft/NftList';
 import NotFound from './components/result/NotFound';
 import Success from './components/result/Success';
-import ZCreate from './zeke/ZCreate';
 
 const Container = styled.div`
   display: flex;
@@ -31,11 +30,11 @@ function App() {
   // TODO: contract 객체 생성
   // TODO: flex 사용해서 footer 바닥에 붙이기
   // TODO: font 설정
-  const location = useLocation();
 
   const [contract, setContract] = useState(null);
   const [web3, setWeb3] = useState(null);
   const [nftList, setNftList] = useState([]);
+  const [viewList, setViewList] = useState([]);
   const [selectedNft, setSelectedNft] = useState(null);
   const [myNftList, setMyNftList] = useState([]);
   const [searchedNftList, setSearchedNftList] = useState([]);
@@ -111,6 +110,8 @@ function App() {
     <Container>
       <Navbar
         web3={web3}
+        nftList={nftList}
+        setViewList={setViewList}
         ethEnabled={ethEnabled}
         setSearchWord={setSearchWord}
       />
@@ -120,12 +121,14 @@ function App() {
           <Route exact path="/" element={<Main />} />
           <Route
             path="/create"
-            element={<Create contract={contract} userAddress={userAddress} />}
+            element={
+              <Create
+                contract={contract}
+                userAddress={userAddress}
+                web3={web3}
+              />
+            }
           />
-          {/* <Route
-            path="/create"
-            element={<ZCreate userAddress={userAddress} />}
-          /> */}
           <Route
             path="/detail/:id"
             element={
@@ -138,12 +141,7 @@ function App() {
           />
           <Route
             element={
-              <NftList
-                nftList={nftList}
-                myNftList={myNftList}
-                searchedNftList={searchedNftList}
-                setSelectedNft={setSelectedNft}
-              />
+              <NftList viewList={viewList} setSelectedNft={setSelectedNft} />
             }
           >
             <Route path="/explore" element={<Explore />} />

@@ -1,0 +1,177 @@
+Compiling your contracts...
+===========================
+> Compiling ./contracts/Migrations.sol
+> Compiling ./contracts/OpzNFTs.sol
+> Compiling @openzeppelin/contracts/access/Ownable.sol
+> Compiling @openzeppelin/contracts/token/ERC721/ERC721.sol
+> Compiling @openzeppelin/contracts/token/ERC721/IERC721.sol
+> Compiling @openzeppelin/contracts/token/ERC721/IERC721Receiver.sol
+> Compiling @openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol
+> Compiling @openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol
+> Compiling @openzeppelin/contracts/token/ERC721/extensions/IERC721Enumerable.sol
+> Compiling @openzeppelin/contracts/token/ERC721/extensions/IERC721Metadata.sol
+> Compiling @openzeppelin/contracts/utils/Address.sol
+> Compiling @openzeppelin/contracts/utils/Context.sol
+> Compiling @openzeppelin/contracts/utils/Counters.sol
+> Compiling @openzeppelin/contracts/utils/Strings.sol
+> Compiling @openzeppelin/contracts/utils/introspection/ERC165.sol
+> Compiling @openzeppelin/contracts/utils/introspection/IERC165.sol
+> Compilation warnings encountered:
+
+    Warning: This declaration shadows an existing declaration.
+  --> project:/contracts/OpzNFTs.sol:47:41:
+   |
+47 |     function mintNFT(address recipient, string memory tokenURI) public onlyOwner returns (uint256) {
+   |                                         ^^^^^^^^^^^^^^^^^^^^^^
+Note: The shadowed declaration is here:
+  --> project:/contracts/OpzNFTs.sol:40:5:
+   |
+40 |     function tokenURI(
+   |     ^ (Relevant source part starts here and spans across multiple lines).
+
+,Warning: Visibility for constructor is ignored. If you want the contract to be non-deployable, making it "abstract" is sufficient.
+  --> project:/contracts/OpzNFTs.sol:14:5:
+   |
+14 |     constructor() public ERC721("OpzNFTs", "OpzNFT") {}
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+> Artifacts written to /Users/progolovego/Documents/yooniquegarage/myProject/BEB_02_openZo/contract/build/contracts
+> Compiled successfully using:
+   - solc: 0.8.10+commit.fc410830.Emscripten.clang
+
+
+
+Starting migrations...
+======================
+> Network name:    'ropsten'
+> Network id:      3
+> Block gas limit: 8000000 (0x7a1200)
+
+
+1_initial_migration.js
+======================
+
+   Deploying 'Migrations'
+   ----------------------
+   ⠋ Blocks: 0            Seconds: 0   > transaction hash:    0x752c590e6992995985867340dac6776cd9e7a897914885d334aed3b2535400d8
+   ⠧ Blocks: 0            Seconds: 0undefined
+   ⠦ Blocks: 1            Seconds: 5undefined
+   ⠼ Blocks: 1            Seconds: 9undefined
+   > Blocks: 3            Seconds: 13
+   > contract address:    0x9721cdFe021b3491Ac0eD4d443691934BA19002a
+   > block number:        11972838
+   > block timestamp:     1644978925
+   > account:             0xA838d543FeC0d556cC4570BC011bCb309264Fc82
+   > balance:             0.368884109533169207
+   > gas used:            250154 (0x3d12a)
+   > gas price:           2.50000001 gwei
+   > value sent:          0 ETH
+   > total cost:          0.00062538500250154 ETH
+
+   Pausing for 2 confirmations...
+
+   -------------------------------
+   > confirmation number: 1 (block: 11972839)
+   > confirmation number: 2 (block: 11972840)
+
+   Deploying 'OpzNFTs'
+   -------------------
+   ⠋ Blocks: 0            Seconds: 0   > transaction hash:    0xf4077bc75eb22ff47f6155fdd5878f7248e17977ba782d5799b4a4427b6383dd
+   ⠸ Blocks: 0            Seconds: 0undefined
+   ⠙ Blocks: 0            Seconds: 5undefined
+   > Blocks: 0            Seconds: 9
+   > contract address:    0x8F02CF84C71081e312FaC55Ba6F92685E2005E71
+   > block number:        11972842
+   > block timestamp:     1644978949
+   > account:             0xA838d543FeC0d556cC4570BC011bCb309264Fc82
+   > balance:             0.360866267007512111
+   > gas used:            3207137 (0x30efe1)
+   > gas price:           2.500000008 gwei
+   > value sent:          0 ETH
+   > total cost:          0.008017842525657096 ETH
+
+   Pausing for 2 confirmations...
+
+   -------------------------------
+   > confirmation number: 2 (block: 11972844)
+
+   > Saving migration to chain.
+   > Saving artifacts
+   -------------------------------------
+   > Total cost:     0.008643227528158636 ETH
+
+Summary
+=======
+> Total deployments:   2
+> Final cost:          0.008643227528158636 ETH
+
+
+----------------------------------------
+Starting migrations...
+======================
+> Network name:    'ropsten'
+> Network id:      3
+> Block gas limit: 8000000 (0x7a1200)
+
+
+2_initial_migration.js
+======================
+
+   Deploying 'OpzNFTsForEveryone'
+   ------------------------------
+   ⠋ Blocks: 0            Seconds: 0   > transaction hash:    0x9a9b3263114f577f50166182ef379debfdfa6ed748bda30c8ed9e73863b6f7f5
+   ⠹ Blocks: 0            Seconds: 0undefined
+   ⠏ Blocks: 0            Seconds: 6undefined
+   ⠧ Blocks: 0            Seconds: 9undefined
+   ⠦ Blocks: 0            Seconds: 13undefined
+   ⠼ Blocks: 0            Seconds: 17undefined
+   ⠸ Blocks: 0            Seconds: 21undefined
+   ⠙ Blocks: 0            Seconds: 25undefined
+   ⠋ Blocks: 0            Seconds: 29undefined
+   ⠏ Blocks: 0            Seconds: 33undefined
+   ⠇ Blocks: 0            Seconds: 37undefined
+   ⠏ Blocks: 0            Seconds: 41undefined
+   ⠙ Blocks: 0            Seconds: 45undefined
+   ⠦ Blocks: 1            Seconds: 49undefined
+   ⠹ Blocks: 1            Seconds: 53undefined
+   ⠙ Blocks: 1            Seconds: 57undefined
+   ⠋ Blocks: 1            Seconds: 61undefined
+   ⠋ Blocks: 1            Seconds: 65undefined
+   ⠇ Blocks: 1            Seconds: 69undefined
+   ⠇ Blocks: 1            Seconds: 73undefined
+   ⠧ Blocks: 1            Seconds: 77undefined
+   ⠴ Blocks: 1            Seconds: 81undefined
+   ⠸ Blocks: 1            Seconds: 85undefined
+   ⠋ Blocks: 1            Seconds: 89undefined
+   ⠇ Blocks: 1            Seconds: 93undefined
+   ⠧ Blocks: 1            Seconds: 97undefined
+   > Blocks: 1            Seconds: 101
+   > contract address:    0x9D6af1E93a2897E6EAcDb32CCE7574B99d6a4255
+   > block number:        11974372
+   > block timestamp:     1645005813
+   > account:             0xA838d543FeC0d556cC4570BC011bCb309264Fc82
+   > balance:             0.346595281397962899
+   > gas used:            3193189 (0x30b965)
+   > gas price:           2.500001681 gwei
+   > value sent:          0 ETH
+   > total cost:          0.007982977867750709 ETH
+
+   Pausing for 2 confirmations...
+
+   -------------------------------
+   > confirmation number: 1 (block: 11974373)
+   > confirmation number: 2 (block: 11974374)
+
+   > Saving migration to chain.
+   > Saving artifacts
+   -------------------------------------
+   > Total cost:     0.007982977867750709 ETH
+
+Summary
+=======
+> Total deployments:   1
+> Final cost:          0.007982977867750709 ETH
+
+
+
