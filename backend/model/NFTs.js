@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 // db mmodel
 const NftSchema = new mongoose.Schema({
-    tokeId: {
+    tokenId: {
         type: Number,
         required: true,
         unique: true

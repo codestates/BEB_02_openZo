@@ -24,6 +24,9 @@ npm start
 ## /nft/token/{tokenId} (get)
 + tokenId로 NFT detail 조회
 
+## /nft/addr/{addr} (get)
++ 가지고있는 nft 주소로 검색
+
 ## /nft/savenft (post)
 + NFT 정보 저장
 
