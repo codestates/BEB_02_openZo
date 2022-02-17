@@ -24,10 +24,9 @@ export default function NftList({ viewList, setSelectedNft }) {
           {viewList.map((nft) => {
             const { metadata, tokenId } = nft;
             return (
-              <Col span={6}>
+              <Col span={6} key={tokenId}>
                 <StyledCard>
                   <NFTCard
-                    key={tokenId}
                     image={metadata.image}
                     name={metadata.name}
                     tokenId={tokenId}

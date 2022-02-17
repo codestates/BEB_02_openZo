@@ -71,12 +71,6 @@ function App() {
     setIsLoading(false);
   };
 
-  // TODO: search 시 Gallery로 filtered List 보내주고 view 하게 하기
-
-  useEffect(() => {
-    console.log(12, nftList);
-  }, [nftList]);
-
   useEffect(async () => {
     if (window.ethereum.selectedAddress) ethEnabled();
     return () => {
@@ -96,7 +90,6 @@ function App() {
 
   useEffect(async () => {
     if (contract) {
-      // TODO: NFT list state 생성
       updateNFTlist(contract);
     }
   }, [contract]);

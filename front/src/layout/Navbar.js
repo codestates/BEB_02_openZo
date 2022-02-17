@@ -45,14 +45,12 @@ export default function Navbar({
   };
 
   const handleMyNftLink = () => {
-    console.log(window.ethereum.selectedAddress);
     const viewNft = nftList.filter(
       (nft) =>
         window.ethereum.selectedAddress.toLowerCase() ===
         nft.tokenOwner.toLowerCase()
     );
 
-    console.log(viewNft);
     setViewList(viewNft);
   };
 
