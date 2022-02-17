@@ -163,7 +163,6 @@ export default function Create({ userAddress, contract, web3 }) {
                   tokenId: res,
                   tokenURI: tokenUri,
                   userAddress: userAddress,
-                  description: values.description ?? "",
                 },
                 {
                   headers: {
