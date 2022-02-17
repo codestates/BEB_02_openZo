@@ -1,10 +1,10 @@
-import React, { useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import styled from 'styled-components';
-import { Row, Col } from 'antd';
+import React, { useEffect } from "react";
+import { useParams } from "react-router-dom";
+import styled from "styled-components";
+import { Row, Col } from "antd";
 
-import ProfileBackground from '../components/banner/ProfileBackground';
-import TransferModalButton from '../components/detail/TransferModalButton';
+import ProfileBackground from "../components/banner/ProfileBackground";
+import TransferModalButton from "../components/detail/TransferModalButton";
 
 const HeadSection = styled.h1`
   height: 15vh;
@@ -61,7 +61,7 @@ const StyledBy = styled.div`
   color: rgba(0, 0, 0, 0.4);
 `;
 
-export default function Detail({ nftList, setSelectedNft }) {
+export default function Detail({ nftList, setSelectedNft, web3, contract }) {
   const params = useParams();
 
   const handleTransferClick = () => {
@@ -110,7 +110,12 @@ export default function Detail({ nftList, setSelectedNft }) {
               <p>{description}</p>
             </StyledDescriptionContent>
 
-            <TransferModalButton tokenOwner={tokenOwner} />
+            <TransferModalButton
+              tokenOwner={tokenOwner}
+              web3={web3}
+              contract={contract}
+              tokenId={tokenId}
+            />
           </DescriptionWrapper>
         </Col>
       </Row>

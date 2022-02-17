@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
-import { Modal, Button, Input } from 'antd';
-import { SendOutlined } from '@ant-design/icons';
-import styled from 'styled-components';
+import React, { useState } from "react";
+import { Modal, Button, Input, message } from "antd";
+import { SendOutlined } from "@ant-design/icons";
+import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 
 const StyledTransferButton = styled.div`
   display: flex;
@@ -15,9 +16,15 @@ const StyledAddress = styled.div`
   margin-top: 1rem;
 `;
 
-export default function TransferModalButton({ tokenOwner }) {
+export default function TransferModalButton({
+  tokenOwner,
+  web3,
+  contract,
+  tokenId,
+}) {
   const [isModalVisible, setIsModalVisible] = useState(false);
-  const [toAddress, setToAddress] = useState('');
+  const [toAddress, setToAddress] = useState("");
+  const navigate = useNavigate();
 
   const showModal = () => {
     setIsModalVisible(true);
@@ -25,6 +32,26 @@ export default function TransferModalButton({ tokenOwner }) {
 
   const handleOk = () => {
     setIsModalVisible(false);
+    // Transfer login
+    if (toAddress) {
+      contract.methods
+        .transferFrom(tokenOwner, toAddress, tokenId)
+        .send({ from: tokenOwner })
+        .on("receipt", (receipt) => {
+          console.log(receipt);
+          message.success({
+            content: " Transfer Success !",
+            style: {
+              marginTop: "20vh",
+            },
+          });
+          setToAddress("");
+          navigate("/mynft");
+        });
+    } else {
+      setIsModalVisible(true);
+      alert("전송받을 사람을 입력하세요");
+    }
   };
 
   const handleCancel = () => {
