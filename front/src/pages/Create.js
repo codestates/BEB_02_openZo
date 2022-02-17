@@ -71,6 +71,7 @@ export default function Create({ userAddress, contract, web3 }) {
   // TODO: tx 보내서 contrack storage에 tokenURI 넣는 로직
   const [image, setImage] = useState(null);
   const [preview, setPreview] = useState(null);
+  const [tkId, setTkId] = useState("0");
   const navigate = useNavigate();
   const url = "http://localhost:4999/nft/savenft";
 
@@ -155,7 +156,6 @@ export default function Create({ userAddress, contract, web3 }) {
             return tokenId;
           })
           .then((res) => {
-            console.log(`tokenId: ${res}`);
             axios
               .post(
                 url,
