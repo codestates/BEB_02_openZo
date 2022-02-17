@@ -7,7 +7,7 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
 
-contract OpzNFTs is ERC721URIStorage, Ownable, ERC721Enumerable {
+contract OpzNFTsForEveryone is ERC721URIStorage, Ownable, ERC721Enumerable {
     using Counters for Counters.Counter;
     Counters.Counter private _tokenIds;
 
@@ -44,7 +44,8 @@ contract OpzNFTs is ERC721URIStorage, Ownable, ERC721Enumerable {
         return super.tokenURI(tokenId);
     }
     
-    function mintNFT(address recipient, string memory tokenURI) public onlyOwner returns (uint256) {
+    // onlyOwner mint시 사용
+    function mintNFT(address recipient, string memory tokenURI) public returns (uint256) {
         _tokenIds.increment();
 
         uint256 newItemId = _tokenIds.current();
@@ -53,4 +54,9 @@ contract OpzNFTs is ERC721URIStorage, Ownable, ERC721Enumerable {
 
         return newItemId;
     }
+
+    // tokenId 가져오기
+    function getTokenId() external view returns (uint) {
+        return _tokenIds.current();
+    } 
 }

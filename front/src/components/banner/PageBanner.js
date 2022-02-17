@@ -1,9 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-
 import Background from './Background';
-
-const Container = styled.div``;
 
 const BackgroundWrapper = styled.div`
   position: absolute;
@@ -25,7 +22,7 @@ const StyledH1 = styled.h1`
   justify-content: center;
   align-items: center;
   height: 100%;
-  font-size: 3rem;
+  font-size: 3.5rem;
   color: rgba(255, 255, 255, 0.5);
 `;
 
@@ -33,13 +30,13 @@ export default function Banner({ text }) {
   // TODO: NFT 몇개 불러와서 넣어주고 Carousel에 표시
 
   return (
-    <Container>
+    <>
       <BackgroundWrapper>
         <Background />
       </BackgroundWrapper>
       <TextWrapper>
         <StyledH1>{text}</StyledH1>
       </TextWrapper>
-    </Container>
+    </>
   );
 }

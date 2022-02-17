@@ -1,5 +1,5 @@
 {
-  "name": "contract",
+  "name": "openzocontract",
   "version": "1.0.0",
   "description": "",
   "main": "truffle-config.js",

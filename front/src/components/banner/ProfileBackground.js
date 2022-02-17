@@ -24,7 +24,7 @@ export default function Banner() {
   return (
     <Container>
       <BackgroundWrapper>
-        <video width="920px" autoPlay loop muted>
+        <video width="1000px" autoPlay loop muted>
           <source src="/videos/Ocean.mp4" type="video/mp4" />
           cannot find any videos
         </video>

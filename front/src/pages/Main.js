@@ -1,10 +1,10 @@
 import React from 'react';
-import Banner from '../components/Banner';
+import MainBanner from '../components/banner/MainBanner';
 
-export default function Main() {
+export default function Main({ nftList }) {
   return (
     <>
-      <Banner></Banner>
+      <MainBanner nftList={nftList} />
     </>
   );
 }

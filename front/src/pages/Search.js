@@ -2,10 +2,12 @@ import React from 'react';
 import SearchBanner from '../components/banner/SearchBanner';
 import NftList from '../components/nft/NftList';
 
-export default function MyNft() {
+export default function Search({ searchWord }) {
   return (
     <>
-      <SearchBanner text="My NFT" />
+      <SearchBanner
+        text={searchWord ? `'${searchWord}' results` : 'All results'}
+      />
     </>
   );
 }
