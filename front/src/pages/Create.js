@@ -71,6 +71,7 @@ export default function Create({ userAddress, contract, web3 }) {
   // TODO: tx 보내서 contrack storage에 tokenURI 넣는 로직
   const [image, setImage] = useState(null);
   const [preview, setPreview] = useState(null);
+  const [tkId, setTkId] = useState("0");
   const navigate = useNavigate();
   const url = "http://localhost:4999/nft/savenft";
 
@@ -155,29 +156,7 @@ export default function Create({ userAddress, contract, web3 }) {
             return tokenId;
           })
           .then((res) => {
-            console.log(`tokenId: ${res}`);
-            axios
-              .post(
-                url,
-                {
-                  tokenId: res,
-                  tokenURI: tokenUri,
-                  userAddress: userAddress,
-                },
-                {
-                  headers: {
-                    "Content-Type": "application/json",
-                  },
-                  withCredentials: true,
-                }
-              )
-              .then((res) => {
-                console.log(res);
-              })
-              .catch((err) => {
-                console.log(`err: ${err}`);
-                // 만약 NFT생성은 완료 되었는데 서버전송에서 오류날 경우따로 DB저장 처리 가능한 함수 필요
-              });
+            handleSaveNFT(res, tokenUri);
           })
           .catch((err) => {
             console.log(err);
@@ -195,23 +174,32 @@ export default function Create({ userAddress, contract, web3 }) {
       if (!values.name) message.error("required NFT name");
     }
   };
-  //// request server with NFTInfo
-  //const handleSaveNFT = () => {
-  //  if (tokenId !== 0 && metaUri !== "")
-  //    axios
-  //      .post("http://localhost:4999/nft/savenft", {
-  //        tokenId,
-  //        metaUri,
-  //        userAddress,
-  //      })
-  //      .then((res) => {
-  //        console.log(`res:${res}`);
-  //      })
-  //      .catch((err) => {
-  //        console.log(`err: ${err}`);
-  //        // 만약 NFT생성은 완료 되었는데 서버전송에서 오류날 경우따로 DB저장 처리 가능한 함수 필요
-  //      });
-  //};
+  // request server with NFTInfo
+  const handleSaveNFT = (tokenId, tokenUri) => {
+    if (tokenId !== 0 && tokenUri !== "")
+      axios
+        .post(
+          url,
+          {
+            tokenId: tokenId,
+            tokenURI: tokenUri,
+            userAddress: userAddress,
+          },
+          {
+            headers: {
+              "Content-Type": "application/json",
+            },
+            withCredentials: true,
+          }
+        )
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((err) => {
+          console.log(`err: ${err}`);
+          // 만약 NFT생성은 완료 되었는데 서버전송에서 오류날 경우따로 DB저장 처리 가능한 함수 필요
+        });
+  };
 
   useEffect(() => {
     return () => {
