@@ -3,6 +3,7 @@ import { Modal, Button, Input, message } from "antd";
 import { SendOutlined } from "@ant-design/icons";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const StyledTransferButton = styled.div`
   display: flex;
@@ -39,6 +40,7 @@ export default function TransferModalButton({
         .send({ from: tokenOwner })
         .on("receipt", (receipt) => {
           console.log(receipt);
+          hadleSaveTransfer(tokenOwner, toAddress, tokenId);
           message.success({
             content: " Transfer Success !",
             style: {
@@ -52,6 +54,30 @@ export default function TransferModalButton({
       setIsModalVisible(true);
       alert("전송받을 사람을 입력하세요");
     }
+  };
+
+  const hadleSaveTransfer = (tokenOwner, toAddress, tokenId) => {
+    axios
+      .post(
+        "http://localhost:4999/nft/transfer",
+        {
+          tokenId: tokenId,
+          sendAddr: toAddress,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+          withCredentials: true,
+        }
+      )
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(`err: ${err}`);
+        // 만약 NFT생성은 완료 되었는데 서버전송에서 오류날 경우따로 DB저장 처리 가능한 함수 필요
+      });
   };
 
   const handleCancel = () => {
